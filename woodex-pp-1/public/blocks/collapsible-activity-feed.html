@@ -1,0 +1,219 @@
+<!-- ============================================================
+  Block: Collapsible Activity Feed
+  Source: https://preline.co/blocks/data-display/activity-feeds/#collapsible-activity-feed
+  Built from the block's own source-derived spec: size-9.5 leading circles on
+  bg-layer/border-layer-line, per-row pseudo-element connector
+  (after:inset-s-[19px] after:border-line-2), uppercase text-[11px] timestamps,
+  two hidden entries behind an HSCollapse "Show 2 more activities" reveal
+  (button self-hides via hs-collapse-open:hidden). File-chip brand marks and
+  photo thumbnails replaced with generic doc icons / stock photos (documented
+  adaptation); entry copy adapted to Woodex PP-1 events.
+============================================================= -->
+<div class="bg-card border border-card-line shadow-2xs rounded-xl p-4 sm:p-6">
+  <h3 class="text-sm font-semibold text-foreground mb-6">Recent activity</h3>
+  <ul>
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 rounded-full overflow-hidden bg-layer border border-layer-line">
+          <img class="size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+        </span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Ayesha Khan</span> added 2 files to task <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/pipeline">DHA-6 refit</a>
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">May 04</p>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <div class="p-2 bg-layer border border-layer-line rounded-lg">
+                <p class="truncate text-xs font-medium text-foreground">kitchen-elevation.pdf</p>
+                <p class="text-xs text-muted-foreground-1">35kb</p>
+              </div>
+              <div class="p-2 bg-layer border border-layer-line rounded-lg">
+                <p class="truncate text-xs font-medium text-foreground">site-measure.pdf</p>
+                <p class="text-xs text-muted-foreground-1">30kb</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-xs font-medium text-foreground rounded-full">B</span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Bilal Ahmed</span> marked <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/quotations">Q-118</a> <span class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">Completed</span>
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">Today</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 rounded-full overflow-hidden bg-layer border border-layer-line">
+          <img class="size-9.5 rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+        </span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Hina Raza</span> added 5 cards to <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/invoices">Payments</a>
+            </p>
+            <div class="mt-2 grid grid-cols-3 gap-2">
+              <img class="h-12 object-cover rounded-md" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Site photo">
+              <img class="h-12 object-cover rounded-md" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Site photo">
+              <img class="h-12 object-cover rounded-md" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Site photo">
+              <span class="grid place-items-center h-12 bg-layer border border-layer-line rounded-md text-xs font-medium text-muted-foreground-1">+2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line rounded-full text-muted-foreground-1">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+        </span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Project status updated</span> — marked <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/projects">Bahria Orchard villa</a> <span class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">In progress</span>
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">Apr 06</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 rounded-full overflow-hidden bg-layer border border-layer-line">
+          <img class="size-9.5 rounded-full" src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80" alt="Avatar">
+        </span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Sana Malik</span> earned a "Top endorsed" badge
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">May 15</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-xs font-medium text-foreground rounded-full">D</span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Kamran Tariq</span> added a new member to Woodex PP-1
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">Now</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Item -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div class="relative flex gap-x-4">
+        <span class="flex shrink-0 justify-center items-center size-9.5 rounded-full overflow-hidden bg-layer border border-layer-line">
+          <img class="size-9.5 rounded-full" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+        </span>
+        <div class="grow mt-1">
+          <div>
+            <p class="text-sm text-muted-foreground-1">
+              <span class="font-semibold text-foreground">Lana Robinson</span> added 2 files to task <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/pipeline">Gulberg showroom</a>
+            </p>
+            <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">Feb 10</p>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <div class="p-2 bg-layer border border-layer-line rounded-lg">
+                <p class="truncate text-xs font-medium text-foreground">weekly-reports.xls</p>
+                <p class="text-xs text-muted-foreground-1">4kb</p>
+              </div>
+              <div class="p-2 bg-layer border border-layer-line rounded-lg">
+                <p class="truncate text-xs font-medium text-foreground">monthly-reports.xls</p>
+                <p class="text-xs text-muted-foreground-1">12kb</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- End Item -->
+
+    <!-- Collapsed region (hidden on first load) -->
+    <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+      <div id="hs-pro-dnao-button" role="region" class="hs-collapse hidden overflow-hidden transition-[height] duration-300">
+        <ul>
+          <!-- Hidden Item -->
+          <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+            <div class="relative flex gap-x-4">
+              <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-xs font-medium text-foreground rounded-full">D</span>
+              <div class="grow mt-1">
+                <div>
+                  <p class="text-sm text-muted-foreground-1">
+                    <span class="font-semibold text-foreground">Kamran Tariq</span> added a new member to Woodex PP-1
+                  </p>
+                  <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">May 15</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- End Hidden Item -->
+
+          <!-- Hidden Item -->
+          <li class="relative last:pb-0 pb-8 last:after:hidden after:absolute after:top-9.5 after:bottom-0 after:inset-s-[19px] after:border-s after:border-line-2">
+            <div class="relative flex gap-x-4">
+              <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line rounded-full text-muted-foreground-1">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+              </span>
+              <div class="grow mt-1">
+                <div>
+                  <p class="text-sm text-muted-foreground-1">
+                    <span class="font-semibold text-foreground">Project status updated</span> — marked <a class="inline-flex items-center gap-x-1.5 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/projects">Model Town duplex</a> <span class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">In progress</span>
+                  </p>
+                  <p class="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground-1">Feb 10</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- End Hidden Item -->
+        </ul>
+      </div>
+    </li>
+    <!-- End Collapsed region -->
+
+    <!-- Reveal control (self-hides once expanded) -->
+    <li class="relative">
+      <div class="relative flex gap-x-4">
+        <span class="grid place-items-center w-6 h-7 ms-[7px] rounded-md bg-layer border border-layer-line text-muted-foreground-1">
+          <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 13 5 5 5-5"/><path d="m7 6 5 5 5-5"/></svg>
+        </span>
+        <div class="grow mt-1">
+          <button type="button" class="hs-collapse-toggle hs-collapse-open:hidden inline-flex items-center gap-x-2 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" aria-expanded="false" aria-controls="hs-pro-dnao-button" data-hs-collapse="#hs-pro-dnao-button">
+            Show 2 more activities
+          </button>
+        </div>
+      </div>
+    </li>
+    <!-- End Reveal control -->
+  </ul>
+</div>

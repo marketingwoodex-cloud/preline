@@ -3,23 +3,18 @@ import {
   AlertTriangle,
   ArrowUpRight,
   CalendarClock,
-  CircleDollarSign,
-  FileText,
-  FolderKanban,
   Gauge,
   Globe,
-  Receipt,
   TrendingUp,
-  Users,
 } from "lucide-react";
 
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { KpiCard } from "@/components/ui/KpiCard";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { Chart } from "@/components/ui/Chart";
-import { StageBadge, ScoreBadge, Badge } from "@/components/ui/StatusBadge";
+import { StageBadge, Badge } from "@/components/ui/StatusBadge";
+import { BlockPartial } from "@/components/BlockPartial";
 import { dashData } from "@/lib/fixture";
-import { CRM_SOURCES, OPEN_STAGES, STAGE_LABEL, formatNumber, formatPkr } from "@/lib/domain";
+import { CRM_SOURCES, OPEN_STAGES, STAGE_LABEL, formatPkr } from "@/lib/domain";
 
 export const metadata = { title: "Dashboard" };
 
@@ -38,7 +33,6 @@ export default function DashboardPage() {
   const crm = d.crm;
   if (!crm) return null;
 
-  const { kpi } = crm;
   const targetPct = crm.target.target > 0 ? Math.min(100, (crm.target.month / crm.target.target) * 100) : 0;
 
   const axisLabels = d.axis.map((iso) => {
@@ -89,15 +83,9 @@ export default function DashboardPage() {
       />
 
       <PageBody className="space-y-5">
-        {/* KPI strip */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
-          <KpiCard label="New enquiries" value={formatNumber(kpi.leads[0])} icon={Users} current={kpi.leads[0]} previous={kpi.leads[1]} spark={crm.series.leads} hint={`${crm.chips.new} unread`} />
-          <KpiCard label="Open pipeline" value={formatPkr(kpi.pipeline)} icon={FolderKanban} hint={`${OPEN_STAGES.reduce((s, st) => s + crm.funnel[st], 0)} live leads`} spark={crm.series.sent} />
-          <KpiCard label="Quotes sent" value={formatNumber(kpi.quotesSent[0])} icon={FileText} current={kpi.quotesSent[0]} previous={kpi.quotesSent[1]} hint={`${kpi.openQuotes[0]} awaiting reply`} spark={crm.series.won} />
-          <KpiCard label="Collected" value={formatPkr(kpi.paid[0])} icon={CircleDollarSign} current={kpi.paid[0]} previous={kpi.paid[1]} spark={crm.series.paid} hint={`${kpi.won} deals won`} />
-          <KpiCard label="Outstanding" value={formatPkr(kpi.unpaid)} icon={Receipt} invert hint={`${crm.overdueN} invoices overdue`} />
-          <KpiCard label="Website" value={`${d.website.pages}`} icon={Globe} hint={`${d.website.published} live · ${d.website.drafts} drafts`} />
-        </div>
+        {/* KPI strip — Preline block: Brand Badge KPI Grid (data-display/kpi-cards).
+            Verbatim block partial injected at runtime. */}
+        <BlockPartial src="/blocks/brand-badge-kpi-grid.html" />
 
         {/* Target + attention */}
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
@@ -281,6 +269,9 @@ export default function DashboardPage() {
                 <Badge tone="neutral">{d.website.published} published</Badge>
               </div>
             </SectionCard>
+
+            {/* Preline block: Collapsible Activity Feed (data-display/activity-feeds). */}
+            <BlockPartial src="/blocks/collapsible-activity-feed.html" />
           </div>
         </div>
       </PageBody>
