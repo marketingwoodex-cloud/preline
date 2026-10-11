@@ -8,6 +8,9 @@ declare global {
   }
 }
 
+/** Bump on every partial content change so stale cached copies are bypassed. */
+const PARTIAL_VERSION = "2026-10-12a";
+
 /**
  * Injects a verbatim Preline block partial (public/blocks/*.html) into the DOM
  * at runtime and hands it to Preline's auto-init so every data-hs-* plugin in
@@ -24,7 +27,11 @@ export function BlockPartial({ src, className }: { src: string; className?: stri
 
   useEffect(() => {
     let cancelled = false;
-    fetch(src)
+    // cache: "no-store" + a version param — the preview proxy/browser held
+    // stale copies of the block partials after updates; the version suffix
+    // also defeats any URL-keyed cache layer between browser and server.
+    const v = PARTIAL_VERSION ? `?v=${PARTIAL_VERSION}` : "";
+    fetch(src + v, { cache: "no-store" })
       .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`${src}: ${r.status}`))))
       .then((t) => {
         if (!cancelled) setHtml(t);
