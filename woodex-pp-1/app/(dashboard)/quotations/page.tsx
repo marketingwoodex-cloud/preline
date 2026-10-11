@@ -109,6 +109,26 @@ export default function QuotationsPage() {
           </div>
         </SectionCard>
 
+        <SectionCard title="Dual-bank routing" subtitle="Approved quotes pick the account by client region; IBAN + Swift print on the PDF footer">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="rounded-lg border border-border bg-background-1 p-4">
+              <p className="flex items-center justify-between text-sm font-semibold text-foreground">
+                Bank Alfalah
+                <span className="inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-teal-500/10 text-teal-500 ring-1 ring-inset ring-teal-500/25">DHA · Gulberg · Model Town</span>
+              </p>
+              <p className="wx-num mt-1 text-xs text-muted-foreground">PK00 ALFH 0000 1234 5678 9012 · SWIFT ALFHPLKX</p>
+            </div>
+            <div className="rounded-lg border border-border bg-background-1 p-4">
+              <p className="flex items-center justify-between text-sm font-semibold text-foreground">
+                Meezan Bank
+                <span className="inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-teal-500/10 text-teal-500 ring-1 ring-inset ring-teal-500/25">Bahria · Cantt · Askari</span>
+              </p>
+              <p className="wx-num mt-1 text-xs text-muted-foreground">PK00 MEZN 0009 8765 4321 0987 · SWIFT MEZNPLKX</p>
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">Approved quotes carry a 1-click <b className="text-foreground">Create invoice</b> action — milestones + advance ledger open prefilled.</p>
+        </SectionCard>
+
         <DataTable
           rows={QUOTES}
           columns={columns}

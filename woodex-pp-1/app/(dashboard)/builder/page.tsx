@@ -119,9 +119,21 @@ export default function BuilderPage() {
             <h2 className="text-sm font-semibold text-foreground">Section library</h2>
             <p className="mt-1 text-xs text-muted-foreground-1">147 preloaded sections converted from the best v26 blocks — usable here and in Admin → Section library. Import/export as JSON.</p>
           </div>
-          <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">
-            Import section JSON
-          </button>
+          <div className="flex gap-x-1.5">
+            <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">
+              Export JSON
+            </button>
+            <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">
+              Import section JSON
+            </button>
+          </div>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-x-1.5 gap-y-1.5">
+          {["All", "Hero", "Services", "Process", "Projects", "Testimonials", "FAQ", "CTA", "Contact"].map((c, i) => (
+            <button key={c} type="button" className={`py-1.5 px-3 inline-flex items-center text-xs font-medium rounded-lg focus:outline-hidden ${i === 0 ? "bg-primary/10 text-primary" : "text-muted-foreground-1 hover:bg-muted-hover"}`}>
+              {c}
+            </button>
+          ))}
         </div>
         <div className="mt-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
           {LIBRARY.map((l) => (

@@ -108,6 +108,32 @@ export default function SeoPage() {
           </div>
         </div>
 
+        {/* Per-page checklist (reuses agent issue data) */}
+        <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-card-line flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-foreground">Page check — <code className="text-primary">/kitchens-dha</code></h2>
+            <span className="text-xs font-bold text-teal-500 wx-num">92/100</span>
+          </div>
+          <ul className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 divide-card-divider">
+            {[
+              ["Title tag", "58 chars · keyword first", true],
+              ["Meta description", "142 chars · price hook", true],
+              ["Single H1", "“Modular kitchens in DHA”", true],
+              ["Image alt text", "12/12 present", true],
+              ["Schema", "LocalBusiness + FAQ", true],
+              ["Canonical + OG image", "canonical set · OG missing", false],
+            ].map(([k, v, ok]) => (
+              <li key={String(k)} className="flex items-center gap-x-3 px-5 py-3">
+                <span className={`grid size-6 shrink-0 place-items-center rounded-full ${ok ? "bg-teal-500/10 text-teal-500" : "bg-amber-500/10 text-amber-500"}`}>
+                  <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">{ok ? <path d="M20 6 9 17l-5-5" /> : <path d="M12 8v5M12 16h.01" />}</svg>
+                </span>
+                <p className="text-sm text-foreground">{k}</p>
+                <p className="ms-auto text-[11px] text-muted-foreground-1">{v}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Keywords */}
         <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-card-line flex items-center justify-between">

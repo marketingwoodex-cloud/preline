@@ -9,7 +9,14 @@
 | U3 | CRM | **Client 360** — unified timeline (chats, WA, quotes, invoices, payments, notes) + 4-stage milestone strip with EN/UR labels, stage photos, review-request link | /clients |
 | U4 | Conversations | **AI agent status + handoff queue** on inbox — engine, rules count, answered vs handed-over, handoff list with take-over action | /chat |
 
-## Batch 2 — next (recommended order)
+## Batch 2 — shipped 2026-10-12 ✅
+U5 dual-bank routing cards + 1-click quote→invoice note on /quotations (8 starter
+templates already present) · U6 per-page SEO checklist panel on /seo · U7 builder
+category filters + Export/Import JSON · U8 WhatsApp agent training (Q&A pairs,
+tone, must-not-answer) on /whatsapp · U9 pipeline card v2 (days-in-stage,
+follow-up, WA/Call/Quote quick actions) · U10 CSV/XLSX export actions on /reports.
+
+## Batch 2 original list (for reference) — now done
 | # | Area | Upgrade |
 |---|------|---------|
 | U5 | Quotations | 8 starter-template gallery + dual-bank routing cards (Alfalah/Meezan, IBAN/Swift) + 1-click quote→invoice action |

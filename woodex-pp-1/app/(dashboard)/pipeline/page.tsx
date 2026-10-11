@@ -71,6 +71,19 @@ export default function PipelinePage() {
                         </span>
                         <span className="wx-num text-[10px] text-muted-foreground-1">{l.created_at.slice(0, 10)}</span>
                       </div>
+                      {/* v2 card: days in stage + next follow-up + quick actions */}
+                      <div className="mt-2 flex items-center justify-between gap-2 border-t border-card-divider pt-2">
+                        <span className="wx-num text-[10px] text-muted-foreground-1">
+                          {Math.max(0, Math.round((Date.now() - new Date(l.created_at).getTime()) / 86400000))}d in stage · follow-up {l.created_at.slice(5, 10)}
+                        </span>
+                        <span className="flex gap-x-1">
+                          {["WA", "Call", "Quote"].map((a) => (
+                            <button key={a} type="button" className="rounded-md bg-primary/10 px-1.5 py-0.5 text-[9px] font-semibold text-primary hover:bg-primary/20 focus:outline-hidden">
+                              {a}
+                            </button>
+                          ))}
+                        </span>
+                      </div>
                     </div>
                   ))}
                   {cards.length === 0 && (

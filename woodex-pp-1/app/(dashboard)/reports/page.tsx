@@ -20,7 +20,17 @@ export default function ReportsPage() {
     <>
       <PageHeader
         title="Reports"
-        description="Run any report on demand or let the schedule deliver it. Exports render as branded PDF + CSV."
+        description="Run any report on demand or let the schedule deliver it. Exports render as branded PDF, CSV or XLSX."
+        actions={
+          <>
+            <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus">
+              Export CSV
+            </button>
+            <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus">
+              Export XLSX
+            </button>
+          </>
+        }
       />
       <PageBody>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
