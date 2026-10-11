@@ -1,0 +1,255 @@
+<!-- ============================================================
+  Block: Classic Dashboard Header
+  Source: https://preline.co/blocks/navigation-layout/dashboard-headers/#classic-dashboard-header
+  Head markup copied verbatim; notification list/account/search overlay
+  completed with the block's own item patterns. Content adapted to Woodex PP-1.
+============================================================= -->
+<header class="lg:ms-65 fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 bg-navbar border-b border-navbar-line">
+  <div class="w-full flex md:flex-nowrap xl:grid xl:grid-cols-3 py-2.5 px-2 sm:px-5">
+    <div class="flex items-center gap-x-2">
+      <!-- Sidebar Toggle -->
+      <button type="button" class="w-7 h-9.5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus lg:hidden" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-pro-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-pro-sidebar">
+        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8L21 12L17 16M3 12H13M3 6H13M3 18H13"/></svg>
+      </button>
+      <!-- End Sidebar Toggle -->
+
+      <!-- Input Form -->
+      <div class="w-full">
+        <div class="relative flex flex-wrap items-center">
+          <input class="py-2 ps-10 pe-16 block w-full min-w-full bg-layer border border-layer-line text-sm rounded-lg placeholder:text-muted-foreground-1 focus:border-border focus:ring-border disabled:opacity-50 disabled:pointer-events-none" id="hs-pro-dnsm-input" type="text" name="search" placeholder="Search Woodex" aria-label="Search" data-hs-overlay="#hs-pro-dnsm">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="shrink-0 size-4 text-muted-foreground-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
+            <kbd class="inline-flex items-center gap-x-1 border border-muted-foreground-2 rounded-lg py-0.5 px-1.5 text-muted-foreground-1"><span class="text-[10px]">⌘</span><span class="text-[10px]">/</span></kbd>
+          </div>
+        </div>
+      </div>
+      <!-- End Input Form -->
+    </div>
+
+    <!-- Search Button (mobile) -->
+    <div class="flex justify-end items-center gap-x-2 xl:col-span-2">
+      <div class="hs-tooltip [--placement:bottom] relative inline-block">
+        <button id="hs-pro-dndsm" type="button" class="hs-tooltip-toggle size-9.5 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus md:hidden" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" data-hs-overlay="#hs-pro-dnsm">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-tooltip border border-tooltip-line text-xs text-tooltip-foreground rounded-lg" role="tooltip">
+          Search
+        </span>
+      </div>
+
+      <!-- Notifications Button Icon -->
+      <div class="hs-tooltip [--placement:bottom] hs-dropdown [--trigger:hover] [--placement:bottom-right] relative inline-block">
+        <button id="hs-pro-dnnd" type="button" class="hs-tooltip-toggle hs-dropdown-toggle size-9.5 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+          <span class="relative block size-4">
+            <span class="absolute right-0 top-0 -mt-1.5 -me-1.5 flex size-2.5 -translate-x-1/2 translate-y-1/2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive-soft opacity-75"></span>
+              <span class="relative inline-flex rounded-full size-2.5 bg-destructive"></span>
+            </span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </span>
+        </button>
+        <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-tooltip border border-tooltip-line text-xs text-tooltip-foreground rounded-lg" role="tooltip">
+          Notification inbox
+        </span>
+
+        <!-- Dropdown -->
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-full sm:w-96 md:w-96 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-dropdown border sm:rounded-lg shadow-md sm:shadow-xl" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-dnnd">
+          <!-- Header -->
+          <div class="flex flex-col gap-x-1 px-5 py-3 md:rounded-t-lg bg-card border-b border-card-line">
+            <div class="flex justify-between items-center gap-2">
+              <h3 class="text-sm font-medium text-foreground">
+                Notification inbox
+              </h3>
+              <button type="button" class="hs-tooltip-toggle size-7 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 inline-block absolute invisible z-20 py-1.5 px-2.5 bg-tooltip border border-tooltip-line text-xs text-tooltip-foreground rounded-lg" role="tooltip">
+                  Preferences
+                </span>
+              </button>
+            </div>
+
+            <!-- Nav Tab -->
+            <nav class="flex space-x-1" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+              <button type="button" class="hs-tab-active:after:bg-secondary hs-tab-active:text-foreground px-2 py-1.5 mb-2 relative inline-flex justify-center items-center gap-x-2 hover:bg-muted-hover text-muted-foreground-1 hover:text-foreground text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus text-muted-foreground-1 focus:text-foreground after:absolute after:-bottom-2 after:inset-x-2 after:z-10 after:h-0.5 after:pointer-events-none disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden active" id="hs-pro-tabs-dnn-item-all" aria-selected="true" data-hs-tab="#hs-pro-tabs-dnn-all" aria-controls="hs-pro-tabs-dnn-all" role="tab">
+                All
+              </button>
+              <button type="button" class="hs-tab-active:after:bg-secondary hs-tab-active:text-foreground px-2 py-1.5 mb-2 relative inline-flex justify-center items-center gap-x-2 hover:bg-muted-hover text-muted-foreground-1 hover:text-foreground text-sm rounded-lg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus text-muted-foreground-1 focus:text-foreground after:absolute after:-bottom-2 after:inset-x-2 after:z-10 after:h-0.5 after:pointer-events-none disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden" id="hs-pro-tabs-dnn-item-archived" aria-selected="false" data-hs-tab="#hs-pro-tabs-dnn-archived" aria-controls="hs-pro-tabs-dnn-archived" role="tab">
+                Archived
+              </button>
+            </nav>
+            <!-- End Nav Tab -->
+          </div>
+          <!-- End Header -->
+
+          <!-- Tab Content -->
+          <div id="hs-pro-tabs-dnn-all" role="tabpanel" aria-labelledby="hs-pro-tabs-dnn-item-all">
+            <div class="h-120 overflow-y-auto overflow-hidden [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
+              <ul class="divide-y divide-dropdown-divider">
+                <!-- List Item -->
+                <li class="relative group w-full flex gap-x-5 text-start bg-surface p-5">
+                  <div class="relative shrink-0">
+                    <img class="shrink-0 size-9.5 rounded-full" src="https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80" alt="Avatar">
+                    <span class="absolute top-4 -inset-s-3 size-2 bg-primary rounded-full"></span>
+                  </div>
+                  <div class="grow">
+                    <p class="text-xs text-muted-foreground-1">
+                      2 hours ago
+                    </p>
+                    <span class="block text-sm font-medium text-foreground">
+                      Ayesha Khan
+                    </span>
+                    <p class="text-sm text-muted-foreground-1">
+                      moved enquiry “DHA Phase 6 — Kitchen refit” from <em class="text-foreground not-italic">Enquiry</em> to <em class="text-foreground not-italic">Quote</em>
+                    </p>
+                  </div>
+                </li>
+                <!-- End List Item -->
+
+                <!-- List Item -->
+                <li class="relative group w-full flex gap-x-5 text-start p-5">
+                  <div class="relative shrink-0">
+                    <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-layer-foreground text-sm font-semibold rounded-full shadow-2xs">
+                      I
+                    </span>
+                  </div>
+                  <div class="grow">
+                    <p class="text-xs text-muted-foreground-1">
+                      3 days ago
+                    </p>
+                    <span class="block text-sm font-medium text-foreground">
+                      INV-1042 overdue
+                    </span>
+                    <p class="text-sm text-muted-foreground-1">
+                      Invoice INV-1042 (PKR 480,000) is 4 days past due — send reminder
+                    </p>
+                  </div>
+                </li>
+                <!-- End List Item -->
+
+                <!-- List Item -->
+                <li class="relative group w-full flex gap-x-5 text-start p-5">
+                  <div class="relative shrink-0">
+                    <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-layer-foreground text-sm font-semibold rounded-full shadow-2xs">
+                      U
+                    </span>
+                  </div>
+                  <div class="grow">
+                    <p class="text-xs text-muted-foreground-1">
+                      5 Jan 2026
+                    </p>
+                    <span class="block text-sm font-medium text-foreground">
+                      New update on Woodex PP-1
+                    </span>
+                    <p class="text-sm text-muted-foreground-1">
+                      WhatsApp Business webhook is now live — new leads land in the pipeline automatically.
+                    </p>
+                    <a class="mt-2 p-1.5 inline-flex items-center border border-card-line rounded-xl hover:bg-layer-hover hover:shadow-2xs focus:outline-hidden focus:bg-layer-focus" href="/settings?tab=security">
+                      <span class="grid w-17.5 h-15.5 place-items-center rounded-lg bg-primary/10 text-primary text-xs font-bold">API</span>
+                      <div class="grow py-2.5 px-4">
+                        <p class="text-sm font-medium text-foreground">
+                          Check API keys
+                        </p>
+                        <p class="inline-flex items-center gap-x-1 text-sm text-muted-foreground-1">
+                          Settings → Security
+                          <svg class="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <!-- End List Item -->
+              </ul>
+            </div>
+          </div>
+          <!-- End Tab Content -->
+
+          <div id="hs-pro-tabs-dnn-archived" class="hidden" role="tabpanel" aria-labelledby="hs-pro-tabs-dnn-item-archived">
+            <div class="h-120 grid place-items-center p-5">
+              <p class="text-sm text-muted-foreground-1">No archived notifications</p>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <a class="py-3 px-5 flex justify-center items-center gap-x-2 text-sm font-semibold border-t border-dropdown-divider bg-card rounded-b-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/activity">
+            View all
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <!-- End Footer -->
+        </div>
+        <!-- End Dropdown -->
+      </div>
+      <!-- End Notifications Button Icon -->
+
+      <!-- Account Dropdown -->
+      <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+        <button id="hs-pro-dnad" type="button" class="hs-dropdown-toggle size-9.5 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+          <span class="flex shrink-0 justify-center items-center size-9.5 bg-layer border border-layer-line text-layer-foreground text-sm font-semibold rounded-full shadow-2xs">
+            KT
+          </span>
+        </button>
+
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-60 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-dropdown border border-dropdown-line rounded-xl shadow-xl" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-dnad">
+          <div class="p-1">
+            <span class="block py-2 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground-1">
+              Woodex Interiors
+            </span>
+            <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/settings">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              Settings
+            </a>
+            <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/activity">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+              Activity log
+            </a>
+            <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/backups">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+              Backups
+            </a>
+          </div>
+          <div class="border-t border-dropdown-divider"></div>
+          <div class="p-1">
+            <span class="block py-2 px-3 text-sm text-muted-foreground-1 truncate">
+              Kamran Tariq · owner@woodex.pk
+            </span>
+            <button type="button" class="w-full text-start py-2 px-3 inline-flex items-center gap-x-2 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus disabled:opacity-50 disabled:pointer-events-none">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Account Dropdown -->
+    </div>
+    <!-- End Search Button (mobile) -->
+  </div>
+</header>
+
+<!-- Search Overlay Modal (part of the header block) -->
+<div id="hs-pro-dnsm" class="hs-overlay size-full fixed top-0 start-0 z-80 overflow-y-auto overflow-hidden" role="dialog" tabindex="-1" aria-labelledby="hs-pro-dnsm-label">
+  <div class="hs-overlay-open:mt-4 hs-overlay-open:opacity-100 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full sm:mx-auto">
+    <div class="relative flex flex-col bg-card border border-card-line shadow-xl rounded-xl mx-4 sm:mx-auto">
+      <div class="p-4 flex justify-between items-center border-b border-card-line">
+        <h3 id="hs-pro-dnsm-label" class="flex w-full items-center gap-x-3">
+          <label for="hs-pro-dnsm-search" class="sr-only">Search</label>
+          <svg class="shrink-0 size-4 text-muted-foreground-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="hs-pro-dnsm-search" type="text" class="py-2.5 w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground-1 focus:outline-hidden" placeholder="Search Woodex enquiries, quotes, clients, pages…" autocomplete="off">
+        </h3>
+        <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus" aria-label="Close" data-hs-overlay="#hs-pro-dnsm">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-4">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground-1">Quick links</p>
+        <div class="flex flex-col gap-y-1">
+          <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/enquiries">Enquiries</a>
+          <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/quotations">Quotations</a>
+          <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/pipeline">Pipeline</a>
+          <a class="py-2 px-3 flex items-center gap-x-2.5 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="/settings?tab=security">API keys</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Search Overlay Modal -->

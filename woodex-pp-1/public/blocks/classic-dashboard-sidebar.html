@@ -1,0 +1,273 @@
+<!-- ============================================================
+  Block: Classic Dashboard Sidebar Layout
+  Source: https://preline.co/blocks/navigation-layout/dashboard-sidebars/#classic-dashboard-sidebar-layout
+  Copied structure/classes per the block's source-derived spec; demo content
+  (Notion/Github, Users/User Profile) replaced with the Woodex PP-1 IA.
+============================================================= -->
+
+<!-- Mobile Navbar (part of the block) -->
+<header class="lg:hidden lg:ms-65 fixed top-0 inset-x-0 z-50 flex flex-wrap md:justify-start md:flex-nowrap bg-navbar border-b border-navbar-line">
+  <div class="flex justify-between basis-full items-center w-full py-2.5 px-2 sm:px-5">
+    <!-- Sidebar Toggle -->
+    <button type="button" class="w-7 h-9.5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-pro-sidebar" aria-label="Toggle navigation" data-hs-overlay="#hs-pro-sidebar">
+      <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8L21 12L17 16M3 12H13M3 6H13M3 18H13"/></svg>
+    </button>
+    <!-- End Sidebar Toggle -->
+
+    <!-- Project Dropdown -->
+    <div class="hs-dropdown [--auto-close:inside] relative flex">
+      <button id="hs-pro-dnwpd-mobile-project" type="button" class="inline-flex items-center text-start font-semibold text-foreground align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:text-muted-foreground-1" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+        <span class="max-w-16 truncate">Woodex</span>
+        <svg class="shrink-0 size-4 ms-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-56 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-dropdown border border-dropdown-line rounded-xl shadow-xl" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-dnwpd-mobile-project">
+        <div class="p-1 space-y-0.5">
+          <label class="py-2 px-3 flex items-center gap-x-2.5 rounded-lg cursor-pointer hover:bg-dropdown-item-hover has-checked:bg-dropdown-item-active focus:outline-hidden focus:bg-dropdown-item-focus">
+            <input type="radio" class="shrink-0 mt-0.5 border-border text-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none" name="hs-pro-dnwpd-mobile-project" checked>
+            <span class="flex flex-col gap-y-0.5">
+              <span class="text-sm text-dropdown-item-foreground">Woodex Live</span>
+              <span class="text-xs text-muted-foreground-1">woodex.pk</span>
+            </span>
+          </label>
+          <label class="py-2 px-3 flex items-center gap-x-2.5 rounded-lg cursor-pointer hover:bg-dropdown-item-hover has-checked:bg-dropdown-item-active focus:outline-hidden focus:bg-dropdown-item-focus">
+            <input type="radio" class="shrink-0 mt-0.5 border-border text-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none" name="hs-pro-dnwpd-mobile-project">
+            <span class="flex flex-col gap-y-0.5">
+              <span class="text-sm text-dropdown-item-foreground">PP-1 Staging</span>
+              <span class="text-xs text-muted-foreground-1">pp1.woodex.pk</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- End Project Dropdown -->
+  </div>
+</header>
+<!-- End Mobile Navbar -->
+
+<!-- ========== SIDEBAR ========== -->
+<aside id="hs-pro-sidebar" class="hs-overlay [--auto-close:lg] w-65 h-full hidden fixed inset-y-0 inset-s-0 z-60 bg-sidebar border-e border-sidebar-line lg:block lg:translate-x-0" role="dialog" aria-label="Sidebar">
+  <!-- Header -->
+  <div class="h-11.5 ps-5 pe-2 lg:ps-8 flex justify-between items-center gap-x-2">
+    <a class="flex items-center gap-x-2" href="/" aria-label="Woodex">
+      <span class="grid size-7 place-items-center rounded-lg bg-primary text-xs font-extrabold text-primary-foreground">W</span>
+      <span class="text-sm font-bold text-foreground tracking-tight">Woodex <span class="text-primary">PP-1</span></span>
+    </a>
+    <button type="button" class="lg:hidden size-8 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent text-muted-foreground-1 hover:bg-muted-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted-focus" aria-label="Close sidebar" data-hs-overlay="#hs-pro-sidebar">
+      <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <!-- End Header -->
+
+  <!-- Nav -->
+  <div class="h-full overflow-y-auto overflow-hidden [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb pb-4">
+    <nav class="hs-accordion-group p-3 space-y-0.5" data-hs-accordion-always-open>
+      <ul class="space-y-0.5">
+        <!-- Dashboard (active) -->
+        <li>
+          <a data-wx-route="/" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 focus:outline-hidden focus:bg-sidebar-nav-focus" href="/">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            Dashboard
+          </a>
+        </li>
+
+        <!-- Sales -->
+        <li class="hs-accordion" id="wx-acc-sales">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus hs-accordion-active:bg-sidebar-nav-active" aria-expanded="false" aria-controls="wx-acc-sales-content">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Sales
+            <svg class="hs-accordion-active:block ms-auto hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+            <svg class="hs-accordion-active:hidden block ms-auto shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="wx-acc-sales-content" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+            <ul class="mt-1 space-y-0.5 ps-8">
+              <li><a data-wx-route="/enquiries" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/enquiries">Enquiries</a></li>
+              <li><a data-wx-route="/pipeline" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/pipeline">Pipeline</a></li>
+              <li><a data-wx-route="/clients" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/clients">Clients</a></li>
+              <li><a data-wx-route="/quotations" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/quotations">Quotations</a></li>
+              <li><a data-wx-route="/invoices" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/invoices">Invoices</a></li>
+              <li><a data-wx-route="/projects" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/projects">Projects</a></li>
+              <li><a data-wx-route="/client-updates" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/client-updates">Client updates</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Conversations -->
+        <li class="hs-accordion" id="wx-acc-conv">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus hs-accordion-active:bg-sidebar-nav-active" aria-expanded="false" aria-controls="wx-acc-conv-content">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            Conversations
+            <svg class="hs-accordion-active:block ms-auto hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+            <svg class="hs-accordion-active:hidden block ms-auto shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="wx-acc-conv-content" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+            <ul class="mt-1 space-y-0.5 ps-8">
+              <li><a data-wx-route="/chat" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/chat">Live chat</a></li>
+              <li><a data-wx-route="/ai" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/ai">Train AI</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Website -->
+        <li class="hs-accordion" id="wx-acc-web">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus hs-accordion-active:bg-sidebar-nav-active" aria-expanded="false" aria-controls="wx-acc-web-content">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            Website
+            <svg class="hs-accordion-active:block ms-auto hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+            <svg class="hs-accordion-active:hidden block ms-auto shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="wx-acc-web-content" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+            <ul class="mt-1 space-y-0.5 ps-8">
+              <li><a data-wx-route="/pages" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/pages">Pages</a></li>
+              <li><a data-wx-route="/builder" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/builder">Page builder</a></li>
+              <li><a data-wx-route="/library" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/library">Section library</a></li>
+              <li><a data-wx-route="/chrome" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/chrome">Header &amp; footer</a></li>
+              <li><a data-wx-route="/media" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/media">Media</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Content -->
+        <li class="hs-accordion" id="wx-acc-content">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus hs-accordion-active:bg-sidebar-nav-active" aria-expanded="false" aria-controls="wx-acc-content-nav">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+            Content
+            <svg class="hs-accordion-active:block ms-auto hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+            <svg class="hs-accordion-active:hidden block ms-auto shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="wx-acc-content-nav" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+            <ul class="mt-1 space-y-0.5 ps-8">
+              <li><a data-wx-route="/blog" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/blog">Blog</a></li>
+              <li><a data-wx-route="/services" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/services">Services</a></li>
+              <li><a data-wx-route="/faqs" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/faqs">FAQs</a></li>
+              <li><a data-wx-route="/testimonials" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/testimonials">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Marketing & SEO -->
+        <li class="hs-accordion" id="wx-acc-seo">
+          <button type="button" class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus hs-accordion-active:bg-sidebar-nav-active" aria-expanded="false" aria-controls="wx-acc-seo-content">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            Marketing &amp; SEO
+            <svg class="hs-accordion-active:block ms-auto hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+            <svg class="hs-accordion-active:hidden block ms-auto shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="wx-acc-seo-content" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+            <ul class="mt-1 space-y-0.5 ps-8">
+              <li><a data-wx-route="/seo" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/seo">SEO</a></li>
+              <li><a data-wx-route="/redirects" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/redirects">Redirects</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Settings -->
+        <li>
+          <a data-wx-route="/settings" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/settings">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-.14v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            Settings
+          </a>
+        </li>
+        <li>
+          <a data-wx-route="/activity" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/activity">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+            Activity log
+          </a>
+        </li>
+        <li>
+          <a data-wx-route="/backups" class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/backups">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            Backups
+          </a>
+        </li>
+
+        <!-- Apps -->
+        <li class="pt-3">
+          <span class="px-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground-1">Apps</span>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/chat">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+            Chat
+          </a>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/enquiries">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span>
+            Inbox
+          </a>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/projects">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
+            Calendars
+          </a>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/pipeline">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span>
+            Kanban Board
+          </a>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/media">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg></span>
+            Files
+          </a>
+        </li>
+        <li>
+          <a class="w-full flex items-center gap-x-3 text-sm rounded-lg px-2.5 py-2 text-sidebar-nav-foreground hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" href="/client-updates">
+            <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"><svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><path d="m19 10-4 4 2 2 4-4-2-2z"/></svg></span>
+            To Do
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- End Nav -->
+
+  <!-- Footer -->
+  <div class="hidden lg:block absolute bottom-0 start-0 end-0 border-t border-sidebar-divider bg-sidebar">
+    <div class="hs-dropdown [--placement:top-right] [--auto-close:inside] relative flex">
+      <button id="hs-pro-dnwpd-footer" type="button" class="w-full flex items-center gap-x-3 px-7 py-3 text-start hover:bg-sidebar-nav-hover focus:outline-hidden focus:bg-sidebar-nav-focus" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+        <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-primary/10 text-xs font-extrabold text-primary">W</span>
+        <span class="grow min-w-0">
+          <span class="block text-sm font-semibold text-foreground truncate">Woodex Live</span>
+          <span class="block text-xs text-muted-foreground-1 truncate">woodex.pk</span>
+        </span>
+        <svg class="shrink-0 size-4 text-muted-foreground-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+      </button>
+      <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-56 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-dropdown border border-dropdown-line rounded-xl shadow-xl" role="menu" aria-orientation="vertical" aria-labelledby="hs-pro-dnwpd-footer">
+        <div class="p-1 space-y-0.5">
+          <label class="py-2 px-3 flex items-center gap-x-2.5 rounded-lg cursor-pointer hover:bg-dropdown-item-hover has-checked:bg-dropdown-item-active focus:outline-hidden focus:bg-dropdown-item-focus">
+            <input type="radio" class="shrink-0 mt-0.5 border-border text-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none" name="hs-pro-dnwpd-footer" checked>
+            <span class="flex flex-col gap-y-0.5">
+              <span class="text-sm text-dropdown-item-foreground">Woodex Live</span>
+              <span class="text-xs text-muted-foreground-1">woodex.pk</span>
+            </span>
+          </label>
+          <label class="py-2 px-3 flex items-center gap-x-2.5 rounded-lg cursor-pointer hover:bg-dropdown-item-hover has-checked:bg-dropdown-item-active focus:outline-hidden focus:bg-dropdown-item-focus">
+            <input type="radio" class="shrink-0 mt-0.5 border-border text-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none" name="hs-pro-dnwpd-footer">
+            <span class="flex flex-col gap-y-0.5">
+              <span class="text-sm text-dropdown-item-foreground">PP-1 Staging</span>
+              <span class="text-xs text-muted-foreground-1">pp1.woodex.pk</span>
+            </span>
+          </label>
+        </div>
+        <div class="border-t border-dropdown-divider"></div>
+        <div class="p-1">
+          <button type="button" class="w-full text-start py-2 px-3 inline-flex items-center gap-x-2 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus disabled:opacity-50 disabled:pointer-events-none">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            Add another project
+          </button>
+          <button type="button" class="w-full text-start py-2 px-3 inline-flex items-center gap-x-2 text-sm rounded-lg text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus disabled:opacity-50 disabled:pointer-events-none">
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            Sign out
+            <span class="ms-auto text-xs text-muted-foreground-1">owner@woodex.pk</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Footer -->
+</aside>
+<!-- ========== END SIDEBAR ========== -->

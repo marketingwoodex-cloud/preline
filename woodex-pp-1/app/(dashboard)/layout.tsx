@@ -1,5 +1,5 @@
-import { Shell } from "@/components/Shell";
+import { BlockShell } from "@/components/BlockShell";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  return <Shell>{children}</Shell>;
+  return <BlockShell>{children}</BlockShell>;
 }
