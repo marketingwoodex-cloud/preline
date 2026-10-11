@@ -4,6 +4,14 @@ export const metadata = { title: "Changelog" };
 
 const ENTRIES = [
   {
+    ver: "2.8.0", when: "2026-10-12", tags: ["Added"],
+    items: [
+      "Frontend v1 declared: master QA audit passed (57 routes, roles, perf)",
+      "Sidebar brand now reads “Admin PP-1 · FE v1”",
+      "docs/QA-AUDIT.md + docs/MWOODEX-MASTER-LIST.md (next project plan)",
+    ],
+  },
+  {
     ver: "2.7.0", when: "2026-10-12", tags: ["Added"],
     items: [
       "Reports cluster: sales, site, print center + scheduled deliveries",
