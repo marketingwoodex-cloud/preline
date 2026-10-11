@@ -9,7 +9,7 @@ declare global {
 }
 
 /** Bump on every partial content change so stale cached copies are bypassed. */
-const PARTIAL_VERSION = "2026-10-12a";
+const PARTIAL_VERSION = "2026-10-12b";
 
 /**
  * Injects a verbatim Preline block partial (public/blocks/*.html) into the DOM
@@ -48,7 +48,12 @@ export function BlockPartial({ src, className }: { src: string; className?: stri
     const tryInit = () => {
       if (window.HSStaticMethods?.autoInit) {
         // Wire all data-hs-* plugins inside the freshly injected markup.
-        window.HSStaticMethods.autoInit();
+        // try/catch: one bad element must never abort wiring the rest.
+        try {
+          window.HSStaticMethods.autoInit();
+        } catch (e) {
+          console.error("[BlockPartial] autoInit", e);
+        }
         return true;
       }
       return false;

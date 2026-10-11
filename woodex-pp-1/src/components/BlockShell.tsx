@@ -62,6 +62,26 @@ export function BlockShell({ children }: { children: React.ReactNode }) {
     };
   }, [pathname, role]);
 
+  // Vanilla fallback: if the Preline runtime never lands (blocked/slow script),
+  // sidebar accordions must still open. Only active when HSStaticMethods is
+  // absent, so we never double-toggle against the real plugin.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (window.HSStaticMethods) return; // real plugin owns the toggle
+      const toggle = (e.target as HTMLElement).closest?.(".hs-accordion-toggle");
+      if (!toggle) return;
+      const acc = toggle.closest(".hs-accordion");
+      if (!acc) return;
+      e.preventDefault();
+      const content = acc.querySelector<HTMLElement>(".hs-accordion-content");
+      const open = acc.classList.toggle("active");
+      content?.classList.toggle("hidden", !open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   const allowed = !ready || canAccessRoute(role, pathname);
 
   return (
