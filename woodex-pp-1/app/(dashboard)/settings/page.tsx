@@ -3,6 +3,7 @@ import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { Badge } from "@/components/ui/StatusBadge";
 import { BlockPartial } from "@/components/BlockPartial";
+import { MEMBERS, FEATURES, ROLE_FEATURES } from "@/lib/roles";
 
 export const metadata = { title: "Settings" };
 
@@ -148,9 +149,105 @@ export default function SettingsPage() {
             </div>
 
             <div className="hidden hs-tabs-active:block" id="team-panel" role="tabpanel" aria-labelledby="tab-team">
-              {/* Preline block: Team Management Table (data-display/admin-utility-tables).
-                  Verbatim block partial injected at runtime; Woodex roles map to teams. */}
-              <BlockPartial src="/blocks/admin-team-management-table.html" />
+              {/* Members — the five Woodex Interior Studio accounts. Switch the active
+                  role with the "Viewing as" control (bottom-right) to see per-role access. */}
+              <div className="bg-card border border-card-line shadow-2xs rounded-xl p-4 sm:p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground">Team members</h3>
+                    <p className="text-sm text-muted-foreground-2">5 accounts · roles mirror the v2.1 api role hierarchy</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                    Invite member
+                  </button>
+                </div>
+                <ul className="mt-4 divide-y divide-card-divider">
+                  {MEMBERS.map((m) => (
+                    <li key={m.id} className="py-4 first:pt-0 last:pb-0 flex items-start gap-x-4">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-5 border border-line-3 text-sm font-semibold text-foreground">
+                        {m.initials}
+                      </span>
+                      <div className="min-w-0 grow">
+                        <div className="flex flex-wrap items-center gap-x-2">
+                          <span className="text-sm font-semibold text-foreground">{m.name}</span>
+                          <span className="inline-flex items-center py-0.5 px-1.5 rounded-md bg-surface text-surface-foreground text-[11px] font-medium">{m.role}</span>
+                          <span className="inline-flex items-center gap-x-1.5 py-0.5 px-1.5 rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500 text-[11px] font-medium">
+                            <span className="size-1.5 rounded-full bg-teal-500" />
+                            {m.status}
+                          </span>
+                        </div>
+                        <p className="mt-0.5 text-sm text-muted-foreground-1">{m.bio}</p>
+                        <a className="mt-0.5 inline-block text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline" href={`mailto:${m.email}`}>
+                          {m.email}
+                        </a>
+                      </div>
+                      <button
+                        type="button"
+                        className="shrink-0 py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus"
+                      >
+                        Edit details
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Role permission matrix — what each role can see and do */}
+              <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
+                <div className="px-6 py-4 border-b border-card-line">
+                  <h3 className="text-sm font-semibold text-foreground">Role permissions</h3>
+                  <p className="text-sm text-muted-foreground-2">
+                    Each role gets a specific slice of the admin — use <span className="font-medium text-foreground">Viewing as</span> (bottom-right) to see it live.
+                  </p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-table-line">
+                    <thead className="bg-muted">
+                      <tr>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-semibold uppercase text-foreground">Feature</th>
+                        {MEMBERS.map((m) => (
+                          <th key={m.id} scope="col" className="px-4 py-3 text-center text-xs font-semibold uppercase text-foreground whitespace-nowrap">
+                            {m.name}
+                            <span className="block text-[10px] font-medium normal-case text-muted-foreground-1">{m.role}</span>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-table-line">
+                      {FEATURES.map((f) => (
+                        <tr key={f.key} className="bg-layer hover:bg-layer-hover">
+                          <td className="px-6 py-3">
+                            <p className="text-sm font-medium text-foreground">{f.label}</p>
+                            <p className="text-xs text-muted-foreground-1">{f.hint}</p>
+                          </td>
+                          {MEMBERS.map((m) => (
+                            <td key={m.id} className="px-4 py-3 text-center">
+                              {ROLE_FEATURES[m.role].includes(f.key) ? (
+                                <span className="inline-grid size-6 place-items-center rounded-full bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">
+                                  <svg className="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                                </span>
+                              ) : (
+                                <span className="inline-grid size-6 place-items-center rounded-full bg-surface text-muted-foreground-1">
+                                  <svg className="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /></svg>
+                                </span>
+                              )}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Preline block: Team Management Table (data-display/admin-utility-tables). */}
+              <div className="mt-5">
+                <BlockPartial src="/blocks/admin-team-management-table.html" />
+              </div>
             </div>
 
             <div className="hidden hs-tabs-active:block" id="security-panel" role="tabpanel" aria-labelledby="tab-security">
