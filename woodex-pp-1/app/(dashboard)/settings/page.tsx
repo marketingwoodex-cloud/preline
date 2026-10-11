@@ -1,306 +1,93 @@
-import { Check, Database, KeyRound, Plug, Shield, Users } from "lucide-react";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { SectionCard } from "@/components/ui/SectionCard";
-import { Badge } from "@/components/ui/StatusBadge";
-import { BlockPartial } from "@/components/BlockPartial";
-import { MEMBERS, FEATURES, ROLE_FEATURES } from "@/lib/roles";
 
 export const metadata = { title: "Settings" };
 
-/**
- * One Settings page with tabs, per the P19 directive: "Settings = one page with
- * tabs… Sidebar shows only 'Settings'." v2.1 had these spread across separate
- * `admin-settings.js`, `admin-users.js`, `admin-security.js`, `admin-integ.js`
- * and `admin-conn.js` screens.
- */
-const TABS = [
-  { id: "general", label: "General" },
-  { id: "business", label: "Business info" },
-  { id: "integrations", label: "Integrations & APIs" },
-  { id: "team", label: "Users & roles" },
-  { id: "security", label: "Security" },
-  { id: "system", label: "System check" },
+const TABS = ["General", "Team", "Integrations", "Preferences"];
+
+const MEMBERS = [
+  { name: "Preview Owner", role: "Owner", badge: "PRO", since: "2019", note: "final approvals · finance" },
+  { name: "Sana Rehman", role: "Sales lead", badge: "PRO", since: "2021", note: "quotes · showroom" },
+  { name: "Omar Malik", role: "Projects", badge: "PRO", since: "2022", note: "site visits · delivery" },
+  { name: "Aiden Craft", role: "Editor", badge: "", since: "2024", note: "content · SEO" },
+  { name: "Workshop Bot", role: "Automation", badge: "", since: "2025", note: "challans · stock" },
+  { name: "Hina Butt", role: "Support", badge: "", since: "2023", note: "tickets · after-care" },
 ];
 
-const INTEGRATIONS = [
-  { name: "WhatsApp Cloud API", group: "Messaging", status: "connected", detail: "1 verified number · template approved" },
-  { name: "Telegram bot", group: "Messaging", status: "connected", detail: "@WoodexInteriorBot · polling" },
-  { name: "Claude", group: "AI", status: "connected", detail: "Monthly spend limit PKR 25,000" },
-  { name: "Google Analytics 4", group: "Google", status: "connected", detail: "Data cached 14 min ago" },
-  { name: "Search Console", group: "Google", status: "not set", detail: "Connect to pull query data" },
-  { name: "Cloudflare Turnstile", group: "Security", status: "connected", detail: "Protecting 6 forms" },
-  { name: "Hostinger SMTP", group: "Email", status: "connected", detail: "Alerts to 4 addresses" },
-  { name: "Stripe / JazzCash", group: "Payments", status: "not set", detail: "Planned for v2.5" },
+const APPS = [
+  { name: "WhatsApp Business", desc: "session + broadcasts", state: "Connected" },
+  { name: "Telegram", desc: "@WoodexInteriorBot", state: "Connected" },
+  { name: "Google Search Console", desc: "SEO + sitemaps", state: "Connected" },
+  { name: "Meta Pixel", desc: "ad attribution", state: "Connected" },
+  { name: "Stripe / PayFast", desc: "advance payments", state: "Review" },
+  { name: "Zoho Books", desc: "accounting sync", state: "Off" },
+  { name: "Cal.com", desc: "visit scheduling", state: "Off" },
+  { name: "Slack", desc: "ops alerts", state: "Off" },
 ];
+
+const S_PILL: Record<string, string> = {
+  Connected: "bg-teal-500/10 text-teal-500 ring-teal-500/25",
+  Review: "bg-amber-500/10 text-amber-500 ring-amber-500/25",
+  Off: "bg-muted text-muted-foreground ring-border",
+};
 
 export default function SettingsPage() {
   return (
     <>
       <PageHeader
         title="Settings"
-        description="Everything in one place with tabs. API keys are stored server-side only and never sent to the browser."
+        description="Workspace, team, integrations and preferences for the whole PP-1 admin."
       />
       <PageBody>
-        <div className="hs-tabs flex flex-col gap-5 lg:flex-row">
-          {/* Tab list */}
-          <div
-            className="hs-tabs-list flex shrink-0 gap-1 overflow-x-auto rounded-xl border border-card-line bg-card p-1 lg:w-56 lg:flex-col lg:overflow-visible"
-            role="tablist"
-            aria-orientation="vertical"
-          >
-            {TABS.map((t, i) => (
-              <button
-                key={t.id}
-                type="button"
-                className="hs-tabs-toggle flex items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground hs-tab-active:bg-primary/10 hs-tab-active:text-primary focus:outline-hidden"
-                id={`tab-${t.id}`}
-                data-hs-tab={`#${t.id}-panel`}
-                aria-controls={`${t.id}-panel`}
-                role="tab"
-                aria-selected={i === 0}
-              >
-                {t.id === "integrations" && <Plug className="size-4" />}
-                {t.id === "team" && <Users className="size-4" />}
-                {t.id === "security" && <Shield className="size-4" />}
-                {t.id === "system" && <Database className="size-4" />}
-                {t.label}
-              </button>
-            ))}
-          </div>
+        {/* Horizontal tabs */}
+        <div className="flex items-center gap-x-1 border-b border-border overflow-x-auto">
+          {TABS.map((t, i) => (
+            <button key={t} type="button" className={`-mb-px py-2.5 px-4 inline-flex items-center whitespace-nowrap text-sm font-medium border-b-2 focus:outline-hidden ${i === 1 ? "border-primary text-primary" : "border-transparent text-muted-foreground-1 hover:text-foreground"}`}>
+              {t}
+            </button>
+          ))}
+        </div>
 
-          {/* Panels */}
-          <div className="min-w-0 flex-1">
-            <div className="hidden hs-tabs-active:block" id="general-panel" role="tabpanel" aria-labelledby="tab-general">
-              <SectionCard title="General" subtitle="Site identity and defaults">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[
-                    { label: "Business name", value: "Woodex Interiors" },
-                    { label: "Default currency", value: "PKR" },
-                    { label: "Default language", value: "English (Urdu secondary)" },
-                    { label: "Timezone", value: "Asia/Karachi" },
-                  ].map((f) => (
-                    <label key={f.label} className="block">
-                      <span className="mb-1.5 block text-[13px] font-medium text-foreground">{f.label}</span>
-                      <input
-                        defaultValue={f.value}
-                        className="h-9 w-full rounded-lg border border-border bg-background-1 px-3 text-sm text-foreground focus:border-primary focus:outline-hidden"
-                      />
-                    </label>
-                  ))}
-                </div>
-              </SectionCard>
-            </div>
-
-            <div className="hidden hs-tabs-active:block" id="business-panel" role="tabpanel" aria-labelledby="tab-business">
-              <SectionCard title="Business info" subtitle="Single source of truth — fixes the WhatsApp number that was hardcoded in 230 places">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[
-                    { label: "WhatsApp number", value: "+92 300 0000000" },
-                    { label: "Office phone", value: "+92 42 0000000" },
-                    { label: "Email", value: "info@woodex.pk" },
-                    { label: "Head office", value: "Gulberg III, Lahore" },
-                    { label: "Bank Alfalah IBAN", value: "PK00ALFH0000000000000000" },
-                    { label: "Meezan Bank IBAN", value: "PK00MEZN0000000000000000" },
-                  ].map((f) => (
-                    <label key={f.label} className="block">
-                      <span className="mb-1.5 block text-[13px] font-medium text-foreground">{f.label}</span>
-                      <input
-                        defaultValue={f.value}
-                        className="wx-num h-9 w-full rounded-lg border border-border bg-background-1 px-3 text-sm text-foreground focus:border-primary focus:outline-hidden"
-                      />
-                    </label>
-                  ))}
-                </div>
-              </SectionCard>
-            </div>
-
-            <div className="hidden hs-tabs-active:block" id="integrations-panel" role="tabpanel" aria-labelledby="tab-integrations">
-              <SectionCard title="Integrations & APIs" subtitle="Grouped by category, each with a status badge and a test button">
-                <div className="space-y-6">
-                  {["Messaging", "AI", "Google", "Security", "Email", "Payments"].map((group) => {
-                    const items = INTEGRATIONS.filter((i) => i.group === group);
-                    if (!items.length) return null;
-                    return (
-                      <div key={group}>
-                        <h4 className="mb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">{group}</h4>
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                          {items.map((i) => (
-                            <div key={i.name} className="flex items-center gap-3 rounded-lg border border-border bg-background-1 p-3">
-                              <KeyRound className="size-4 shrink-0 text-muted-foreground" />
-                              <div className="min-w-0 flex-1">
-                                <p className="truncate text-[13px] font-medium text-foreground">{i.name}</p>
-                                <p className="truncate text-xs text-muted-foreground">{i.detail}</p>
-                              </div>
-                              <Badge tone={i.status === "connected" ? "green" : "neutral"}>{i.status}</Badge>
-                              <button
-                                type="button"
-                                className="shrink-0 rounded-md border border-border px-2 py-1 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                              >
-                                Test
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </SectionCard>
-            </div>
-
-            <div className="hidden hs-tabs-active:block" id="team-panel" role="tabpanel" aria-labelledby="tab-team">
-              {/* Members — the five Woodex Interior Studio accounts. Switch the active
-                  role with the "Viewing as" control (bottom-right) to see per-role access. */}
-              <div className="bg-card border border-card-line shadow-2xs rounded-xl p-4 sm:p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-foreground">Team members</h3>
-                    <p className="text-sm text-muted-foreground-2">5 accounts · roles mirror the v2.1 api role hierarchy</p>
-                  </div>
-                  <button
-                    type="button"
-                    className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none"
-                  >
-                    <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
-                    Invite member
-                  </button>
-                </div>
-                <ul className="mt-4 divide-y divide-card-divider">
-                  {MEMBERS.map((m) => (
-                    <li key={m.id} className="py-4 first:pt-0 last:pb-0 flex items-start gap-x-4">
-                      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-5 border border-line-3 text-sm font-semibold text-foreground">
-                        {m.initials}
-                      </span>
-                      <div className="min-w-0 grow">
-                        <div className="flex flex-wrap items-center gap-x-2">
-                          <span className="text-sm font-semibold text-foreground">{m.name}</span>
-                          <span className="inline-flex items-center py-0.5 px-1.5 rounded-md bg-surface text-surface-foreground text-[11px] font-medium">{m.role}</span>
-                          <span className="inline-flex items-center gap-x-1.5 py-0.5 px-1.5 rounded-md bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500 text-[11px] font-medium">
-                            <span className="size-1.5 rounded-full bg-teal-500" />
-                            {m.status}
-                          </span>
-                        </div>
-                        <p className="mt-0.5 text-sm text-muted-foreground-1">{m.bio}</p>
-                        <a className="mt-0.5 inline-block text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline" href={`mailto:${m.email}`}>
-                          {m.email}
-                        </a>
-                      </div>
-                      <button
-                        type="button"
-                        className="shrink-0 py-1.5 px-2.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus"
-                      >
-                        Edit details
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Role permission matrix — what each role can see and do */}
-              <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
-                <div className="px-6 py-4 border-b border-card-line">
-                  <h3 className="text-sm font-semibold text-foreground">Role permissions</h3>
-                  <p className="text-sm text-muted-foreground-2">
-                    Each role gets a specific slice of the admin — use <span className="font-medium text-foreground">Viewing as</span> (bottom-right) to see it live.
+        {/* Team tab (default shown) */}
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {MEMBERS.map((m) => (
+            <div key={m.name} className="bg-card border border-card-line shadow-2xs rounded-xl p-5 transition-shadow hover:shadow-md">
+              <div className="flex items-start gap-x-3">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-5 border border-line-3 text-sm font-semibold text-foreground">
+                  {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase()}
+                </span>
+                <div className="min-w-0">
+                  <p className="flex items-center gap-x-2 text-sm font-semibold text-foreground">
+                    {m.name}
+                    {m.badge && <span className="inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-bold bg-primary/10 text-primary ring-1 ring-inset ring-primary/25">{m.badge}</span>}
                   </p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-table-line">
-                    <thead className="bg-muted">
-                      <tr>
-                        <th scope="col" className="px-6 py-3 text-start text-xs font-semibold uppercase text-foreground">Feature</th>
-                        {MEMBERS.map((m) => (
-                          <th key={m.id} scope="col" className="px-4 py-3 text-center text-xs font-semibold uppercase text-foreground whitespace-nowrap">
-                            {m.name}
-                            <span className="block text-[10px] font-medium normal-case text-muted-foreground-1">{m.role}</span>
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-table-line">
-                      {FEATURES.map((f) => (
-                        <tr key={f.key} className="bg-layer hover:bg-layer-hover">
-                          <td className="px-6 py-3">
-                            <p className="text-sm font-medium text-foreground">{f.label}</p>
-                            <p className="text-xs text-muted-foreground-1">{f.hint}</p>
-                          </td>
-                          {MEMBERS.map((m) => (
-                            <td key={m.id} className="px-4 py-3 text-center">
-                              {ROLE_FEATURES[m.role].includes(f.key) ? (
-                                <span className="inline-grid size-6 place-items-center rounded-full bg-teal-100 text-teal-800 dark:bg-teal-500/10 dark:text-teal-500">
-                                  <svg className="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                </span>
-                              ) : (
-                                <span className="inline-grid size-6 place-items-center rounded-full bg-surface text-muted-foreground-1">
-                                  <svg className="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /></svg>
-                                </span>
-                              )}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <p className="text-xs text-muted-foreground-1">{m.role} · since {m.since}</p>
                 </div>
               </div>
-
-              {/* Preline block: Team Management Table (data-display/admin-utility-tables). */}
-              <div className="mt-5">
-                <BlockPartial src="/blocks/admin-team-management-table.html" />
+              <p className="mt-3 text-xs text-muted-foreground-1">{m.note}</p>
+              <div className="mt-4 flex items-center gap-x-2 border-t border-card-divider pt-3">
+                <button type="button" className="py-1.5 px-2.5 inline-flex items-center text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">Profile</button>
+                <button type="button" className="py-1.5 px-2.5 inline-flex items-center text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">Permissions</button>
               </div>
             </div>
+          ))}
+        </div>
 
-            <div className="hidden hs-tabs-active:block" id="security-panel" role="tabpanel" aria-labelledby="tab-security">
-              <SectionCard title="Security" subtitle="Baseline checks applied on every action">
-                <ul className="space-y-2">
-                  {[
-                    "Password hashing with bcrypt",
-                    "Login rate limiting (5 attempts / 15 min)",
-                    "CSRF token on every mutating action",
-                    "Role check on every API action",
-                    "Prepared statements on all SQL",
-                    "Upload MIME and extension validation",
-                    "_private/ blocked by .htaccess",
-                    "Automatic backup before bulk changes",
-                  ].map((s) => (
-                    <li key={s} className="flex items-center gap-2.5 rounded-lg border border-border bg-background-1 px-3 py-2 text-[13px] text-foreground">
-                      <Check className="size-4 shrink-0 text-primary" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </SectionCard>
-
-              {/* Preline block: API Key Management Table (data-display/admin-utility-tables).
-                  Reference image 9 — keys are never shown; Copy Key / Regenrate Key per block. */}
-              <div className="mt-5">
-                <BlockPartial src="/blocks/admin-api-key-table.html" />
+        {/* Integrations grid */}
+        <h2 className="mt-8 text-sm font-semibold text-foreground">Integrations</h2>
+        <p className="mt-1 text-xs text-muted-foreground-1">Everything the admin talks to. Off apps can be connected without a redeploy.</p>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {APPS.map((a) => (
+            <div key={a.name} className="bg-card border border-card-line shadow-2xs rounded-xl p-4">
+              <div className="flex items-start justify-between gap-2">
+                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 1 1 0 10h-2M8 12h8" /></svg>
+                </span>
+                <span className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${S_PILL[a.state]}`}>{a.state}</span>
               </div>
+              <p className="mt-3 text-sm font-semibold text-foreground">{a.name}</p>
+              <p className="text-[11px] text-muted-foreground-1">{a.desc}</p>
             </div>
-
-            <div className="hidden hs-tabs-active:block" id="system-panel" role="tabpanel" aria-labelledby="tab-system">
-              <SectionCard title="System check" subtitle="Runs against the live server — this is what caught the Hostinger SSL and builder-token failures">
-                <ul className="space-y-2">
-                  {[
-                    { label: "PHP version & extensions", state: "pass", detail: "PHP 8.2 · curl, mbstring, openssl" },
-                    { label: "Database connection", state: "pass", detail: "MySQL · 14 tables" },
-                    { label: "_private/ writable", state: "pass", detail: "Backups and JSON stores reachable" },
-                    { label: "Builder sign-in", state: "pass", detail: "Session fallback accepted" },
-                    { label: "SSL to Google / OpenAI / Meta", state: "pass", detail: "Bundled CA list in use" },
-                    { label: "Admin headers received", state: "warn", detail: "X-Forwarded-Proto stripped by proxy" },
-                  ].map((c) => (
-                    <li key={c.label} className="flex items-center gap-3 rounded-lg border border-border bg-background-1 px-3 py-2.5">
-                      <Badge tone={c.state === "pass" ? "green" : "gold"}>{c.state === "pass" ? "pass" : "warning"}</Badge>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-[13px] font-medium text-foreground">{c.label}</p>
-                        <p className="truncate text-xs text-muted-foreground">{c.detail}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </SectionCard>
-            </div>
-          </div>
+          ))}
         </div>
       </PageBody>
     </>
