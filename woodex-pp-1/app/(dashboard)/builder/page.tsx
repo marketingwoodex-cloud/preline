@@ -18,16 +18,23 @@ const CANVAS = [
   { name: "CTA band", note: "Monsoon offer · links /bookings", state: "scheduled" },
 ];
 
+const LIBRARY = [
+  { cat: "Hero", count: 18 }, { cat: "Services", count: 22 }, { cat: "Process", count: 12 },
+  { cat: "Projects", count: 20 }, { cat: "Testimonials", count: 14 }, { cat: "FAQ", count: 12 },
+  { cat: "CTA", count: 16 }, { cat: "Contact", count: 10 }, { cat: "Stats", count: 8 },
+  { cat: "Team", count: 8 }, { cat: "Pricing", count: 4 }, { cat: "Blog", count: 3 },
+];
+
 export default function BuilderPage() {
   return (
     <>
       <PageHeader
         title="Page Builder"
-        description="Compose woodex.pk pages from pre-approved blocks. Draft: /kitchens-lahore — autosaved 2 min ago."
+        description="Compose woodex.pk pages from the 147-section library. Draft: /kitchens-lahore — autosaved 2 min ago."
         actions={
           <>
             <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus">
-              Preview
+              Save as template
             </button>
             <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
               Publish
@@ -83,7 +90,7 @@ export default function BuilderPage() {
           </div>
 
           {/* Page settings */}
-          <div className="bg-card border border-card-line shadow-2xs rounded-xl p-5">
+          <div className="bg-card border border-card-line shadow-2xs rounded-xl p-5 self-start">
             <h2 className="text-sm font-semibold text-foreground">Page settings</h2>
             <dl className="mt-4 space-y-3 text-xs">
               <div>
@@ -104,6 +111,28 @@ export default function BuilderPage() {
               </div>
             </dl>
           </div>
+        </div>
+
+        {/* Section library */}
+        <div className="mt-8 flex items-end justify-between gap-3">
+          <div>
+            <h2 className="text-sm font-semibold text-foreground">Section library</h2>
+            <p className="mt-1 text-xs text-muted-foreground-1">147 preloaded sections converted from the best v26 blocks — usable here and in Admin → Section library. Import/export as JSON.</p>
+          </div>
+          <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">
+            Import section JSON
+          </button>
+        </div>
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+          {LIBRARY.map((l) => (
+            <button key={l.cat} type="button" className="group bg-card border border-card-line shadow-2xs rounded-xl p-4 text-start transition-shadow hover:shadow-md">
+              <span className="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary transition-transform group-hover:scale-110">
+                <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" /></svg>
+              </span>
+              <p className="mt-2.5 text-xs font-semibold text-foreground">{l.cat}</p>
+              <p className="text-[11px] text-muted-foreground-1 wx-num">{l.count} sections</p>
+            </button>
+          ))}
         </div>
       </PageBody>
     </>

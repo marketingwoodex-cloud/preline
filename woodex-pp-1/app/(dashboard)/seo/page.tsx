@@ -6,7 +6,7 @@ const KPIS = [
   { label: "Avg. position", value: "11.4", note: "−3.2 in 60 days" },
   { label: "Keywords top-3", value: "24", note: "of 96 tracked" },
   { label: "Indexed pages", value: "41", note: "1 pending discovery" },
-  { label: "Open issues", value: "3", note: "links · images · alts" },
+  { label: "Agent last scan", value: "74/100", note: "21 issues · Oct 12 04:00" },
 ];
 
 const KEYWORDS = [
@@ -16,8 +16,21 @@ const KEYWORDS = [
   { kw: "kitchen price in lahore 2026", intent: "Info", pos: 4, vol: "880", page: "/blog/kitchen-costs" },
   { kw: "bathroom renovation lahore", intent: "Money", pos: 7, vol: "1,600", page: "/bathrooms-model-town" },
   { kw: "office fit out lahore", intent: "Money", pos: 9, vol: "390", page: "/fitouts-johar-town" },
-  { kw: "woodex interiors", intent: "Brand", pos: 1, vol: "480", page: "/ (home)" },
 ];
+
+const ISSUES = [
+  { page: "/gallery", kind: "heavy images", sev: "high", msg: "13 images > 300 KB — run pipeline (est −1.8 MB)", fix: "auto-fix ready" },
+  { page: "/bathrooms-model-town", kind: "meta description", sev: "med", msg: "118 chars, missing price hook — AI rewrite drafted", fix: "approve draft" },
+  { page: "/blog/eid-collection-2026", kind: "alt text", sev: "med", msg: "6 images without alt — AI drafts ready for review", fix: "approve drafts" },
+  { page: "/kitchens-cantt", kind: "title tag", sev: "low", msg: "duplicate of /kitchens-lahore title — uniquify", fix: "auto-fix ready" },
+  { page: "/franchise", kind: "noindex", sev: "low", msg: "draft page indexed — add noindex until published", fix: "auto-fix ready" },
+];
+
+const SEV: Record<string, string> = {
+  high: "bg-destructive/10 text-destructive ring-destructive/25",
+  med: "bg-amber-500/10 text-amber-500 ring-amber-500/25",
+  low: "bg-muted text-muted-foreground ring-border",
+};
 
 const posTone = (n: number) => (n <= 3 ? "text-teal-500" : n <= 10 ? "text-amber-500" : "text-destructive");
 
@@ -26,10 +39,10 @@ export default function SeoPage() {
     <>
       <PageHeader
         title="SEO"
-        description="Search Console + rank tracker for woodex.pk. Business-first: money keywords outrank vanity keywords."
+        description="Rank tracker plus the on-page SEO agent: it scans every page, ranks the problems, drafts fixes for titles, meta and alt text — humans approve, always."
         actions={
           <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
-            Track keyword
+            Run scan now
           </button>
         }
       />
@@ -44,6 +57,58 @@ export default function SeoPage() {
           ))}
         </div>
 
+        <div className="mt-5 grid grid-cols-1 xl:grid-cols-3 gap-5">
+          {/* Agent */}
+          <div className="bg-card border border-card-line shadow-2xs rounded-xl p-5 self-start">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-semibold text-foreground">SEO agent</h2>
+              <span className="inline-flex items-center gap-x-1.5 rounded-full bg-teal-500/10 px-2.5 py-1 text-[11px] font-medium text-teal-500 ring-1 ring-inset ring-teal-500/25">
+                <span className="size-1.5 rounded-full bg-teal-500" /> weekly scan on
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground-1">
+              Edits titles, meta descriptions and alt text only — never page body. Every apply backs the page up first; owner approves.
+            </p>
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground-1">Engine</p>
+            <div className="mt-2 flex flex-wrap gap-x-1.5 gap-y-1.5">
+              {["Claude", "OpenAI", "Hermes (OpenRouter)", "Local model"].map((e, i) => (
+                <button key={e} type="button" className={`py-1.5 px-3 inline-flex items-center text-xs font-medium rounded-lg focus:outline-hidden ${i === 0 ? "bg-primary/10 text-primary ring-1 ring-inset ring-primary/25" : "text-muted-foreground-1 hover:bg-muted-hover"}`}>
+                  {e}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-2 border-t border-card-divider pt-3 text-center">
+              <div><p className="text-lg font-bold text-foreground wx-num">147</p><p className="text-[10px] text-muted-foreground-1">pages scanned</p></div>
+              <div><p className="text-lg font-bold text-amber-500 wx-num">21</p><p className="text-[10px] text-muted-foreground-1">open issues</p></div>
+              <div><p className="text-lg font-bold text-teal-500 wx-num">9</p><p className="text-[10px] text-muted-foreground-1">fixes applied</p></div>
+            </div>
+          </div>
+
+          {/* Issue queue */}
+          <div className="xl:col-span-2 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-card-line">
+              <h2 className="text-sm font-semibold text-foreground">Issue queue — approve to apply</h2>
+            </div>
+            <ul className="divide-y divide-card-divider">
+              {ISSUES.map((i) => (
+                <li key={i.page + i.kind} className="px-5 py-3.5 flex items-center gap-x-4">
+                  <span className={`shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${SEV[i.sev]}`}>{i.sev}</span>
+                  <div className="min-w-0 grow">
+                    <p className="text-sm text-foreground"><code className="text-xs text-primary">{i.page}</code> · {i.kind}</p>
+                    <p className="truncate text-xs text-muted-foreground-1">{i.msg}</p>
+                  </div>
+                  <span className="hidden md:block shrink-0 text-[11px] text-teal-500">{i.fix}</span>
+                  <div className="flex shrink-0 gap-x-1.5">
+                    <button type="button" className="py-1.5 px-2.5 text-xs font-medium rounded-lg bg-teal-500/10 text-teal-500 hover:bg-teal-500/20 focus:outline-hidden">Approve</button>
+                    <button type="button" className="py-1.5 px-2.5 text-xs font-medium rounded-lg border border-border bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden">Skip</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Keywords */}
         <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b border-card-line flex items-center justify-between">
             <h2 className="text-sm font-semibold text-foreground">Tracked keywords</h2>
@@ -72,9 +137,6 @@ export default function SeoPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-          <div className="px-5 py-3 border-t border-card-line bg-surface">
-            <p className="text-[11px] text-muted-foreground-1">Competitor watch: 2 rivals gained on “bathroom renovation lahore” — content refresh queued in /speed.</p>
           </div>
         </div>
       </PageBody>
