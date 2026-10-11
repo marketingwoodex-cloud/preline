@@ -1,0 +1,139 @@
+<!-- ============================================================
+  Block: Team Management Table
+  Source: https://preline.co/blocks/data-display/admin-utility-tables/#team-management-table
+  Head (card header, Export/Filter dropdowns, thead) copied verbatim from the
+  block's markup fence; rows reproduce the block's row template with the block's
+  own demo data. Outer page wrapper (max-w-340 py-10…) replaced with a plain div
+  so the block can be embedded inside a tab panel.
+============================================================= -->
+<div>
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="bg-layer border border-layer-line rounded-xl shadow-2xs overflow-hidden">
+          <!-- Header -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-table-line">
+            <div>
+              <h2 class="text-xl font-semibold text-foreground">
+                Teams
+              </h2>
+              <p class="text-sm text-muted-foreground-2">
+                Create teams, edit, download and more.
+              </p>
+            </div>
+            <div>
+              <div class="inline-flex gap-x-2">
+                <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+                  <button id="hs-as-table-table-export-dropdown" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Export
+                  </button>
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-40 z-20 bg-dropdown border border-dropdown-line divide-y divide-dropdown-divider shadow-2xl rounded-lg" role="menu" aria-orientation="vertical" aria-labelledby="hs-as-table-table-export-dropdown">
+                    <div class="py-2 first:pt-0 last:pb-0">
+                      <span class="block py-2 px-3 text-xs font-medium uppercase text-muted-foreground">
+                        Options
+                      </span>
+                      <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                        Copy
+                      </a>
+                      <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="#">
+                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+                        Print
+                      </a>
+                    </div>
+                    <div class="py-2 first:pt-0 last:pb-0">
+                      <span class="block py-2 px-3 text-xs font-medium uppercase text-muted-foreground">
+                        Download options
+                      </span>
+                      <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="#">Excel</a>
+                      <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="#">.CSV</a>
+                      <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-dropdown-item-foreground hover:bg-dropdown-item-hover focus:outline-hidden focus:bg-dropdown-item-focus" href="#">.PDF</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+                  <button id="hs-as-table-table-filter-dropdown" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
+                    Filter
+                    <span class="inline-flex items-center gap-1.5 py-0.5 px-1.5 rounded-full text-xs font-medium border border-line-3 text-foreground">
+                      2
+                    </span>
+                  </button>
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-40 z-20 bg-dropdown border border-dropdown-line divide-y divide-dropdown-divider shadow-2xl rounded-lg" role="menu" aria-orientation="vertical" aria-labelledby="hs-as-table-table-filter-dropdown">
+                    <div class="divide-y divide-dropdown-divider">
+                      <label for="hs-as-filters-dropdown-frequency" class="flex items-center py-2.5 px-3">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-as-filters-dropdown-frequency" checked>
+                        <span class="ms-3 text-sm text-foreground">Frequency</span>
+                      </label>
+                      <label for="hs-as-filters-dropdown-status" class="flex items-center py-2.5 px-3">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-as-filters-dropdown-status" checked>
+                        <span class="ms-3 text-sm text-foreground">Status</span>
+                      </label>
+                      <label for="hs-as-filters-dropdown-created" class="flex items-center py-2.5 px-3">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-as-filters-dropdown-created">
+                        <span class="ms-3 text-sm text-foreground">Created</span>
+                      </label>
+                      <label for="hs-as-filters-dropdown-due-date" class="flex items-center py-2.5 px-3">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-as-filters-dropdown-due-date">
+                        <span class="ms-3 text-sm text-foreground">Due Date</span>
+                      </label>
+                      <label for="hs-as-filters-dropdown-amount" class="flex items-center py-2.5 px-3">
+                        <input type="checkbox" class="shrink-0 size-4 bg-transparent border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none" id="hs-as-filters-dropdown-amount">
+                        <span class="ms-3 text-sm text-foreground">Amount</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none">
+                  Download all
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End Header -->
+          <!-- Table -->
+          <table class="min-w-full divide-y divide-table-line">
+            <thead class="bg-muted">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Team<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Description<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Industry<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Rated<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Members<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-end"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-table-line">
+ROWS_PLACEHOLDER
+            </tbody>
+          </table>
+          <!-- End Table -->
+          <!-- Footer -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-table-line">
+            <div>
+              <p class="text-sm text-muted-foreground-2">
+                <span class="font-semibold text-foreground">6</span> results
+              </p>
+            </div>
+            <div>
+              <div class="inline-flex gap-x-2">
+                <button type="button" class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                  Prev
+                </button>
+                <button type="button" class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-layer-focus">
+                  Next
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End Footer -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Card -->
+</div>

@@ -2,6 +2,7 @@ import { Check, Database, KeyRound, Plug, Shield, Users } from "lucide-react";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { Badge } from "@/components/ui/StatusBadge";
+import { BlockPartial } from "@/components/BlockPartial";
 
 export const metadata = { title: "Settings" };
 
@@ -147,27 +148,9 @@ export default function SettingsPage() {
             </div>
 
             <div className="hidden hs-tabs-active:block" id="team-panel" role="tabpanel" aria-labelledby="tab-team">
-              <SectionCard title="Users & roles" subtitle="Owner, Admin, Editor and Sales. CRM and money screens are hidden from Editor.">
-                <ul className="divide-y divide-card-divider">
-                  {[
-                    { name: "Kamran Tariq", email: "owner@woodex.pk", role: "Owner" },
-                    { name: "Sana Malik", email: "sana@woodex.pk", role: "Admin" },
-                    { name: "Bilal Ahmed", email: "bilal@woodex.pk", role: "Sales" },
-                    { name: "Hina Raza", email: "hina@woodex.pk", role: "Editor" },
-                  ].map((u) => (
-                    <li key={u.email} className="flex items-center gap-3 py-2.5 first:pt-0 last:pb-0">
-                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary/15 text-[11px] font-bold text-primary">
-                        {u.name.split(" ").map((p) => p[0]).join("")}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-[13px] font-medium text-foreground">{u.name}</p>
-                        <p className="truncate text-xs text-muted-foreground">{u.email}</p>
-                      </div>
-                      <Badge tone={u.role === "Owner" ? "gold" : "neutral"}>{u.role}</Badge>
-                    </li>
-                  ))}
-                </ul>
-              </SectionCard>
+              {/* Preline block: Team Management Table (data-display/admin-utility-tables).
+                  Verbatim block partial injected at runtime; Woodex roles map to teams. */}
+              <BlockPartial src="/blocks/admin-team-management-table.html" />
             </div>
 
             <div className="hidden hs-tabs-active:block" id="security-panel" role="tabpanel" aria-labelledby="tab-security">
@@ -190,6 +173,12 @@ export default function SettingsPage() {
                   ))}
                 </ul>
               </SectionCard>
+
+              {/* Preline block: API Key Management Table (data-display/admin-utility-tables).
+                  Reference image 9 — keys are never shown; Copy Key / Regenrate Key per block. */}
+              <div className="mt-5">
+                <BlockPartial src="/blocks/admin-api-key-table.html" />
+              </div>
             </div>
 
             <div className="hidden hs-tabs-active:block" id="system-panel" role="tabpanel" aria-labelledby="tab-system">

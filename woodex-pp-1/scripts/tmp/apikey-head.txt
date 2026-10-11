@@ -1,0 +1,51 @@
+<!-- ============================================================
+  Block: API Key Management Table
+  Source: https://preline.co/blocks/data-display/admin-utility-tables/#api-key-management-table
+  Card header + thead copied verbatim; rows built from the block's own
+  source-derived spec (six rows, status pills, kebab menus — including the
+  source's "Regenrate Key" label kept verbatim per the spec). Outer page
+  wrapper replaced with a plain div for tab-panel embedding.
+============================================================= -->
+<div>
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="bg-layer border border-layer-line rounded-xl shadow-2xs overflow-hidden">
+          <!-- Header -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-table-line">
+            <div>
+              <h2 class="text-xl font-semibold text-foreground">
+                API Keys
+              </h2>
+              <p class="text-sm text-muted-foreground-2">
+                Keys you have generated to connect with third-party clients or access the <a class="inline-flex items-center gap-x-1.5 text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="/settings?tab=integrations">Woodex API.</a>
+              </p>
+            </div>
+            <div>
+              <div class="inline-flex gap-x-2">
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-layer border border-layer-line text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus disabled:opacity-50 disabled:pointer-events-none" href="#">
+                  View all
+                </a>
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus disabled:opacity-50 disabled:pointer-events-none" href="#">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                  Create
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- End Header -->
+          <!-- Table -->
+          <table class="min-w-full divide-y divide-table-line">
+            <thead class="bg-muted">
+              <tr>
+                <th scope="col" class="ps-6 pe-3 py-3"><div class="flex items-center h-5"><input id="hs-table-checkbox-all" type="checkbox" class="shrink-0 border-line-3 rounded-sm shadow-2xs text-primary focus:ring-0 focus:ring-offset-0 checked:bg-primary-checked checked:border-primary-checked disabled:opacity-50 disabled:pointer-events-none"></div></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Name<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Created by<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">API Key<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Status<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-start"><a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-foreground hover:text-muted-foreground-1 focus:outline-hidden focus:text-muted-foreground-1" href="#">Created<svg class="shrink-0 size-3.5 text-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></a></th>
+                <th scope="col" class="px-6 py-3 text-end"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-table-line">
