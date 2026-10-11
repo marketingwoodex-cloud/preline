@@ -88,3 +88,8 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Woodex PP-1 (Next.js app)
+woodex-pp-1/.next
+woodex-pp-1/node_modules
+woodex-pp-1/next-env.d.ts
