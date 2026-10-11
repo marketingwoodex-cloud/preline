@@ -7,7 +7,7 @@
  * this matrix mirrors its role hierarchy (owner > admin > editor/sales/support).
  */
 
-export type RoleId = "owner" | "admin" | "editor" | "sales" | "support";
+export type RoleId = "owner" | "admin" | "editor" | "sales" | "support" | "automation";
 
 export interface Member {
   id: RoleId;
@@ -71,6 +71,16 @@ export const MEMBERS: Member[] = [
     status: "Active",
     bio: "Team member at Woodex Interior Studio.",
   },
+  {
+    id: "automation",
+    name: "Automation",
+    role: "automation",
+    roleLabel: "automation",
+    email: "automation@woodex.pk",
+    initials: "A",
+    status: "Active",
+    bio: "Automation account at Woodex Interior Studio.",
+  },
 ];
 
 export const ROLE_LABEL: Record<RoleId, string> = {
@@ -79,26 +89,42 @@ export const ROLE_LABEL: Record<RoleId, string> = {
   editor: "Developer (editor)",
   sales: "Sales",
   support: "Support",
+  automation: "Automation (bot)",
 };
 
 /** Route prefixes each role may open. `*` = everything. */
 export const ROLE_ROUTES: Record<RoleId, string[] | "*"> = {
   owner: "*",
   admin: [
-    "/", "/enquiries", "/pipeline", "/clients", "/quotations", "/invoices",
-    "/projects", "/client-updates", "/chat", "/ai", "/pages", "/builder",
-    "/library", "/chrome", "/media", "/blog", "/services", "/faqs",
-    "/testimonials", "/seo", "/redirects", "/settings", "/activity",
+    "/", "/analytics", "/activity", "/tasks", "/sales", "/enquiries", "/pipeline",
+    "/quotations", "/bookings", "/invoices", "/payments", "/clients", "/contacts",
+    "/deals", "/contracts", "/approvals", "/chat", "/threads", "/whatsapp",
+    "/telegram", "/calls", "/campaigns", "/templates", "/segments", "/schedules",
+    "/pages", "/builder", "/projects", "/services", "/city-pages", "/insights",
+    "/media", "/blocks", "/seo", "/speed", "/redirects", "/ai", "/offer-engine",
+    "/prompts", "/automations", "/training-data", "/mcp-server", "/reports",
+    "/print-center", "/settings", "/tickets", "/health", "/logs", "/changelog",
+    "/notifications", "/financial", "/sales-tracking",
   ],
   editor: [
-    "/", "/pages", "/builder", "/library", "/chrome", "/media", "/blog",
-    "/services", "/faqs", "/testimonials", "/seo", "/redirects", "/activity",
+    "/", "/pages", "/builder", "/projects", "/services", "/city-pages",
+    "/insights", "/media", "/blocks", "/seo", "/speed", "/redirects",
+    "/reports/site", "/activity", "/changelog",
   ],
   sales: [
-    "/", "/enquiries", "/pipeline", "/clients", "/quotations", "/invoices",
-    "/projects", "/client-updates", "/chat", "/activity",
+    "/", "/analytics", "/tasks", "/sales", "/enquiries", "/pipeline",
+    "/quotations", "/bookings", "/invoices", "/payments", "/clients",
+    "/contacts", "/deals", "/contracts", "/approvals", "/chat", "/threads",
+    "/calls", "/reports/sales", "/activity", "/financial", "/sales-tracking",
   ],
-  support: ["/", "/chat", "/enquiries", "/clients", "/projects", "/activity"],
+  support: [
+    "/", "/chat", "/threads", "/whatsapp", "/telegram", "/calls", "/clients",
+    "/contacts", "/tickets", "/activity", "/tasks",
+  ],
+  automation: [
+    "/", "/automations", "/ai", "/offer-engine", "/prompts", "/training-data",
+    "/mcp-server", "/logs", "/health", "/activity", "/notifications",
+  ],
 };
 
 export interface FeatureAccess {
@@ -118,18 +144,20 @@ export const FEATURES: FeatureAccess[] = [
   { key: "apikeys", label: "API keys & security", hint: "Generate/regenerate keys, security baseline" },
   { key: "backups", label: "Backups", hint: "Restore points and bulk-change safety nets" },
   { key: "roles", label: "Users & roles", hint: "Invite members, change roles" },
+  { key: "automations", label: "AI & Automations", hint: "Automations master dashboard, AI studio, MCP server, training data" },
 ];
 
 export const ROLE_FEATURES: Record<RoleId, string[]> = {
-  owner: ["crm", "money", "conversations", "website", "content", "seo", "settings", "apikeys", "backups", "roles"],
-  admin: ["crm", "money", "conversations", "website", "content", "seo", "settings", "roles"],
+  owner: ["crm", "money", "conversations", "website", "content", "seo", "settings", "apikeys", "backups", "roles", "automations"],
+  admin: ["crm", "money", "conversations", "website", "content", "seo", "settings", "roles", "automations"],
   editor: ["website", "content", "seo", "conversations"],
   sales: ["crm", "money", "conversations"],
   support: ["crm", "conversations"],
+  automation: ["automations"],
 };
 
 export function roleOf(id: string): RoleId {
-  return (["owner", "admin", "editor", "sales", "support"] as const).includes(id as RoleId)
+  return (["owner", "admin", "editor", "sales", "support", "automation"] as const).includes(id as RoleId)
     ? (id as RoleId)
     : "owner";
 }
