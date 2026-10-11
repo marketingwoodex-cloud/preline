@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { BlockPartial } from "@/components/BlockPartial";
 import { RoleSwitcher } from "@/components/RoleSwitcher";
 import { canAccessRoute, ROLE_LABEL, ROLE_STORAGE_KEY, roleOf, type RoleId } from "@/lib/roles";
 
@@ -11,12 +10,22 @@ import { canAccessRoute, ROLE_LABEL, ROLE_STORAGE_KEY, roleOf, type RoleId } fro
  *   - Classic Dashboard Sidebar Layout (navigation-layout/dashboard-sidebars)
  *   - Classic Dashboard Header        (navigation-layout/dashboard-headers)
  *
- * The sidebar partial carries `data-wx-route` markers; this component marks the
- * row for the current route active (same `bg-sidebar-nav-active` treatment the
- * block ships), opens its parent accordion, and hides rows the active role
- * cannot access (see src/lib/roles.ts). Inaccessible routes render a guard card.
+ * The partial HTML arrives server-rendered (see (dashboard)/layout.tsx) so the
+ * shell exists with zero JS. The sidebar partial carries `data-wx-route`
+ * markers; this component marks the row for the current route active (same
+ * `bg-sidebar-nav-active` treatment the block ships), opens its parent
+ * accordion, and hides rows the active role cannot access (src/lib/roles.ts).
+ * Inaccessible routes render a guard card.
  */
-export function BlockShell({ children }: { children: React.ReactNode }) {
+export function BlockShell({
+  children,
+  sidebarHtml,
+  headerHtml,
+}: {
+  children: React.ReactNode;
+  sidebarHtml: string;
+  headerHtml: string;
+}) {
   const pathname = usePathname();
   const [role, setRole] = useState<RoleId>("owner");
   const [ready, setReady] = useState(false);
@@ -86,10 +95,10 @@ export function BlockShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {/* Sidebar block (includes its own mobile navbar) */}
-      <BlockPartial src="/blocks/classic-dashboard-sidebar.html" />
-      {/* Header block (includes the search overlay modal) */}
-      <BlockPartial src="/blocks/classic-dashboard-header.html" />
+      {/* Sidebar block (includes its own mobile navbar) — server-included */}
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: sidebarHtml }} />
+      {/* Header block (includes the search overlay modal) — server-included */}
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: headerHtml }} />
 
       <main id="content" className="lg:ps-65 pt-15 min-h-screen bg-background">
         {allowed ? (
