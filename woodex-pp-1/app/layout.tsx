@@ -27,6 +27,37 @@ export const viewport: Viewport = {
  * bar and this bootstrap can never disagree. Woodex Admin v2.1 used a separate
  * `wxaTheme` key; that value is migrated once so operators keep their choice.
  */
+/**
+ * Belt-and-braces shell insurance, independent of the app bundle (so it still
+ * runs if the browser ever executes a cached old bundle):
+ *  1) The search overlay #hs-pro-dnsm must stay `hidden` until Preline opens it
+ *     (it is fixed size-full z-80; without `hidden` it invisibly swallows all
+ *     clicks on the page).
+ *  2) If the Preline runtime never arrives, a vanilla handler keeps the sidebar
+ *     accordion groups working. It steps back the moment HSStaticMethods exists.
+ */
+const shellInsurance = `(function(){
+  var guard=setInterval(function(){
+    var ov=document.getElementById("hs-pro-dnsm");
+    if(ov&&!ov.classList.contains("open")&&!ov.classList.contains("hidden")){ov.classList.add("hidden");}
+  },300);
+  setTimeout(function(){clearInterval(guard);},8000);
+  setTimeout(function(){
+    if(window.HSStaticMethods)return;
+    document.addEventListener("click",function(e){
+      if(window.HSStaticMethods)return;
+      var t=e.target&&e.target.closest?e.target.closest(".hs-accordion-toggle"):null;
+      if(!t)return;
+      var acc=t.closest(".hs-accordion");if(!acc)return;
+      e.preventDefault();
+      var c=acc.querySelector(".hs-accordion-content");
+      var open=acc.classList.toggle("active");
+      if(c)c.classList.toggle("hidden",!open);
+      t.setAttribute("aria-expanded",String(open));
+    });
+  },2500);
+})();`;
+
 const themeBootstrap = `(function(){
   var h=document.documentElement;
   try{
@@ -54,6 +85,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* Preline auto-init: wires every data-hs-* component after hydration. */}
         <script src="/preline.js" defer />
+        {/* Shell insurance: overlay guard + accordion fallback (see above). */}
+        <script dangerouslySetInnerHTML={{ __html: shellInsurance }} />
       </body>
     </html>
   );

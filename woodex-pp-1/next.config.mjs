@@ -7,6 +7,20 @@ const here = dirname(fileURLToPath(import.meta.url));
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
+  // Block partials and the Preline runtime must NEVER be served stale: the
+  // preview proxy/browser previously cached them and kept resurrecting old
+  // shells (including an invisible click-swallowing overlay).
+  async headers() {
+    const noStore = [
+      { key: "Cache-Control", value: "no-store, no-cache, must-revalidate, proxy-revalidate" },
+      { key: "Pragma", value: "no-cache" },
+      { key: "Expires", value: "0" },
+    ];
+    return [
+      { source: "/blocks/:path*", headers: noStore },
+      { source: "/preline.js", headers: noStore },
+    ];
+  },
   // This app lives in a subfolder of the preline repo, which has its own
   // package-lock.json. Pin the tracing root so Next doesn't infer the repo
   // root and trace the whole library into the standalone output.

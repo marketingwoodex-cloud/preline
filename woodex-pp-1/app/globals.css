@@ -62,3 +62,35 @@
 .wx-num {
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------------------------------------------------------------------------
+   Sidebar hover motion — nav rows slide and their icon tile lifts on hover.
+--------------------------------------------------------------------------- */
+#hs-pro-sidebar a[data-wx-route],
+#hs-pro-sidebar .hs-accordion-toggle {
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    padding-inline-start 0.18s ease;
+}
+#hs-pro-sidebar a[data-wx-route]:hover,
+#hs-pro-sidebar .hs-accordion-toggle:hover {
+  padding-inline-start: 0.85rem;
+}
+#hs-pro-sidebar a[data-wx-route] > span:first-child {
+  transition: transform 0.18s ease;
+}
+#hs-pro-sidebar a[data-wx-route]:hover > span:first-child {
+  transform: scale(1.12);
+}
+#hs-pro-sidebar .hs-accordion-toggle svg {
+  transition: transform 0.18s ease;
+}
+#hs-pro-sidebar .hs-accordion.active .hs-accordion-toggle svg {
+  transform: rotate(0.001deg); /* keep transition context for chevrons */
+}
+/* Bottom project switcher row gets the same lift */
+#hs-pro-sidebar footer button,
+#hs-pro-sidebar [aria-label="Sidebar"] footer button {
+  transition: background-color 0.18s ease;
+}

@@ -9,7 +9,7 @@ declare global {
 }
 
 /** Bump on every partial content change so stale cached copies are bypassed. */
-const PARTIAL_VERSION = "2026-10-12b";
+const PARTIAL_VERSION = "2026-10-12c";
 
 /**
  * Injects a verbatim Preline block partial (public/blocks/*.html) into the DOM
