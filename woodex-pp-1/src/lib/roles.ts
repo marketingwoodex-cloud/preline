@@ -104,12 +104,12 @@ export const ROLE_ROUTES: Record<RoleId, string[] | "*"> = {
     "/media", "/blocks", "/seo", "/speed", "/redirects", "/ai", "/offer-engine",
     "/prompts", "/automations", "/training-data", "/mcp-server", "/reports",
     "/print-center", "/settings", "/tickets", "/health", "/logs", "/changelog",
-    "/notifications", "/financial", "/sales-tracking",
+    "/notifications", "/security", "/financial", "/sales-tracking",
   ],
   editor: [
     "/", "/pages", "/builder", "/projects", "/services", "/city-pages",
     "/insights", "/media", "/blocks", "/seo", "/speed", "/redirects",
-    "/reports/site", "/activity", "/changelog",
+    "/reports/site", "/activity", "/changelog", "/blog",
   ],
   sales: [
     "/", "/analytics", "/tasks", "/sales", "/enquiries", "/pipeline",

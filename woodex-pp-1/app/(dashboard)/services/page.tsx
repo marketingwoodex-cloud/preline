@@ -1,73 +1,58 @@
-import { Building2, Plus } from "lucide-react";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { SectionCard } from "@/components/ui/SectionCard";
-import { Badge } from "@/components/ui/StatusBadge";
-import { SERVICE_PAGES } from "@/lib/fixture";
-import { formatNumber } from "@/lib/domain";
 
 export const metadata = { title: "Services" };
 
-export default function ServicesPage() {
-  const totalPages = SERVICE_PAGES.reduce((s, x) => s + x.pages, 0);
-  const totalLeads = SERVICE_PAGES.reduce((s, x) => s + x.leads_30d, 0);
+const SERVICES = [
+  { name: "Modular kitchens", from: "PKR 8.5L", cycle: "4–6 weeks", leads: 46, margin: "A", desc: "Design → install, imported + local hardware" },
+  { name: "Wardrobes & walk-ins", from: "PKR 4.2L", cycle: "3–4 weeks", leads: 28, margin: "A", desc: "Sliding, hinged, walk-in dressing rooms" },
+  { name: "Bathroom redesign", from: "PKR 2.8L", cycle: "2–3 weeks", leads: 17, margin: "B", desc: "Vanity units, tiling supervision, fittings" },
+  { name: "Office fit-outs", from: "PKR 15L", cycle: "6–10 weeks", leads: 6, margin: "S", desc: "Stations, cabins, reception, acoustic panels" },
+  { name: "TV walls & media units", from: "PKR 1.9L", cycle: "2 weeks", leads: 12, margin: "B", desc: "Back panels, cabling, lighting integration" },
+  { name: "Refit & after-care", from: "PKR 60k", cycle: "1 week", leads: 9, margin: "B", desc: "Hinges, runners, polish, door realignment" },
+];
 
+const MARGIN: Record<string, string> = {
+  S: "bg-primary/10 text-primary ring-primary/25",
+  A: "bg-teal-500/10 text-teal-500 ring-teal-500/25",
+  B: "bg-secondary/10 text-secondary ring-secondary/25",
+};
+
+export default function ServicesPage() {
   return (
     <>
       <PageHeader
         title="Services"
-        description="Service lines and the pages generated from them. Each service can spawn city variants (Service × City) from a template."
+        description="The catalogue the site, quotes and broadcasts all pull from. Prices are ‘from’ ranges — never fixed without a visit."
         actions={
-          <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover">
-            <Plus className="size-4" />
+          <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
             New service
           </button>
         }
       />
-      <PageBody className="space-y-5">
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          {[
-            { label: "Service lines", value: SERVICE_PAGES.length },
-            { label: "Generated pages", value: totalPages },
-            { label: "Leads (30d)", value: formatNumber(totalLeads) },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl border border-card-line bg-card px-4 py-3">
-              <p className="text-[13px] text-muted-foreground">{s.label}</p>
-              <p className="wx-num mt-1 text-2xl font-bold text-foreground">{s.value}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {SERVICE_PAGES.map((s) => (
-            <SectionCard key={s.id} className="flex flex-col">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-start gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
-                    <Building2 className="size-4" />
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="truncate text-sm font-semibold text-foreground">{s.name}</h3>
-                    <p className="wx-num truncate text-xs text-muted-foreground">/{s.slug}/</p>
-                  </div>
-                </div>
-                <Badge tone={s.status === "live" ? "green" : "neutral"}>{s.status}</Badge>
+      <PageBody>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {SERVICES.map((s) => (
+            <div key={s.name} className="bg-card border border-card-line shadow-2xs rounded-xl p-5 transition-shadow hover:shadow-md">
+              <div className="flex items-start justify-between gap-2">
+                <h2 className="text-sm font-semibold text-foreground">{s.name}</h2>
+                <span className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-bold ring-1 ring-inset ${MARGIN[s.margin]}`}>margin {s.margin}</span>
               </div>
-
+              <p className="mt-2 text-xs text-muted-foreground-1">{s.desc}</p>
               <dl className="mt-4 grid grid-cols-3 gap-2 border-t border-card-divider pt-3 text-center">
                 <div>
-                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Pages</dt>
-                  <dd className="wx-num text-lg font-bold text-foreground">{s.pages}</dd>
+                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground-1">From</dt>
+                  <dd className="mt-0.5 text-xs font-bold text-foreground wx-num">{s.from}</dd>
                 </div>
                 <div>
-                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Leads 30d</dt>
-                  <dd className="wx-num text-lg font-bold text-primary">{s.leads_30d}</dd>
+                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground-1">Cycle</dt>
+                  <dd className="mt-0.5 text-xs font-bold text-foreground">{s.cycle}</dd>
                 </div>
                 <div>
-                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground">Enquiries</dt>
-                  <dd className="wx-num text-lg font-bold text-foreground">{s.enquiries}</dd>
+                  <dt className="text-[10px] uppercase tracking-wide text-muted-foreground-1">Open leads</dt>
+                  <dd className="mt-0.5 text-xs font-bold text-primary wx-num">{s.leads}</dd>
                 </div>
               </dl>
-            </SectionCard>
+            </div>
           ))}
         </div>
       </PageBody>

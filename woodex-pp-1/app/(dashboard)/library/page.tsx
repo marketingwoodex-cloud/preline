@@ -1,93 +1,51 @@
-import { Copy, Globe2, Layers } from "lucide-react";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { SectionCard } from "@/components/ui/SectionCard";
-import { Badge } from "@/components/ui/StatusBadge";
-import { BLOCKS } from "@/lib/fixture";
-import { relativeDay } from "@/lib/domain";
 
-export const metadata = { title: "Section library" };
+export const metadata = { title: "Design Library" };
+
+const FINISHES = [
+  { name: "Walnut veneer (matte)", type: "Veneer", stock: "42 sheets", tone: "bg-[#5b4632]", pop: "most specified in 2026" },
+  { name: "Ash blonde (satin)", type: "Veneer", stock: "18 sheets", tone: "bg-[#c9b28c]", pop: "scandi kitchens" },
+  { name: "Matte black lacquer", type: "Lacquer", stock: "30 sheets", tone: "bg-[#17181c]", pop: "TV walls" },
+  { name: "Ivory matte lacquer", type: "Lacquer", stock: "26 sheets", tone: "bg-[#ece7dd]", pop: "wardrobes" },
+  { name: "Brass inlay strip", type: "Inlay", stock: "120 m", tone: "bg-[#b98a3d]", pop: "Eid collection" },
+  { name: "Fluted oak panel", type: "Panel", stock: "14 sheets", tone: "bg-[#8a6a48]", pop: "receptions" },
+  { name: "Emerald gloss acrylic", type: "Acrylic", stock: "9 sheets", tone: "bg-[#14532d]", pop: "statement islands" },
+  { name: "Terrazzo-look laminate", type: "Laminate", stock: "22 sheets", tone: "bg-[#d8d3ca]", pop: "bathroom vanities" },
+];
 
 export default function LibraryPage() {
-  const cats = [...new Set(BLOCKS.map((b) => b.cat))];
-  const globalCount = BLOCKS.filter((b) => b.global).length;
-
   return (
     <>
       <PageHeader
-        title="Section library"
-        description="Saved sections shared between the admin and the page builder. Global blocks are edited once and pushed to every page using them."
+        title="Design Library"
+        description="Finishes and materials the showroom quotes from. Swatches sync to the sample-kit courier list."
         actions={
-          <>
-            <button type="button" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background-1 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted">
-              <Copy className="size-4" />
-              Import JSON
-            </button>
-            <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover">
-              <Layers className="size-4" />
-              New section
-            </button>
-          </>
+          <button type="button" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+            Add finish
+          </button>
         }
       />
-      <PageBody className="space-y-5">
-        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          {cats.map((c) => (
-            <span key={c} className="rounded-lg border border-border bg-background-1 px-2.5 py-1">
-              {c}
-              <b className="wx-num ml-1.5 font-semibold text-foreground">{BLOCKS.filter((b) => b.cat === c).length}</b>
-            </span>
-          ))}
-          <span className="ml-auto flex items-center gap-1.5">
-            <Globe2 className="size-3.5" />
-            {globalCount} global blocks
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {BLOCKS.map((b) => (
-            <SectionCard key={b.id} className="flex flex-col" bodyClassName="p-0">
-              {/* Scaled preview placeholder — the builder renders the real HTML here */}
-              <div className="relative h-32 overflow-hidden rounded-t-xl border-b border-card-divider bg-muted/40">
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="w-3/4 space-y-1.5 opacity-60">
-                    <div className="h-2 w-2/3 rounded-full bg-primary/40" />
-                    <div className="h-1.5 w-full rounded-full bg-border" />
-                    <div className="h-1.5 w-5/6 rounded-full bg-border" />
-                    <div className="mt-2 flex gap-1.5">
-                      <div className="h-4 w-10 rounded bg-primary/30" />
-                      <div className="h-4 w-10 rounded bg-border" />
-                    </div>
-                  </div>
+      <PageBody>
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+          {FINISHES.map((f) => (
+            <div key={f.name} className="group bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden transition-shadow hover:shadow-md">
+              <div className={`h-24 ${f.tone} transition-transform duration-200 group-hover:scale-[1.02]`} />
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="text-sm font-semibold text-foreground">{f.name}</h2>
+                  <span className="shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-muted text-muted-foreground">{f.type}</span>
                 </div>
-                {b.global && (
-                  <span className="absolute right-2 top-2">
-                    <Badge tone="cyan">global</Badge>
-                  </span>
-                )}
-              </div>
-
-              <div className="flex flex-1 flex-col p-3.5">
-                <h3 className="truncate text-[13px] font-semibold text-foreground">{b.name}</h3>
-                <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                  {b.cat} · {b.kind}
+                <p className="mt-2 flex items-center justify-between text-[11px] text-muted-foreground-1">
+                  <span className="wx-num">{f.stock}</span>
+                  <span>{f.pop}</span>
                 </p>
-
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {b.tags.map((t) => (
-                    <span key={t} className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                      #{t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-auto flex items-center justify-between gap-2 border-t border-card-divider pt-2.5 text-[11px] text-muted-foreground">
-                  <span className="wx-num">Used on {b.used_on} pages</span>
-                  <span>{relativeDay(b.updated)}</span>
-                </div>
               </div>
-            </SectionCard>
+            </div>
           ))}
         </div>
+        <p className="mt-5 text-xs text-muted-foreground-1">
+          Low-stock rule: under 10 sheets auto-raises a purchase suggestion in /approvals.
+        </p>
       </PageBody>
     </>
   );

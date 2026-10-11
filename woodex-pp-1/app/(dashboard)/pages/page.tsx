@@ -1,132 +1,84 @@
-"use client";
-
-import { Globe, Plus, Upload } from "lucide-react";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
-import { DataTable, type Column } from "@/components/ui/DataTable";
-import { PageBadge, ScoreBadge } from "@/components/ui/StatusBadge";
-import { PAGES } from "@/lib/fixture";
-import { formatNumber, relativeDay, type SitePage } from "@/lib/domain";
 
+export const metadata = { title: "Pages" };
 
-const columns: Column<SitePage>[] = [
-  {
-    key: "path",
-    header: "Page",
-    text: (p) => `${p.path} ${p.title}`,
-    sortValue: (p) => p.path,
-    render: (p) => (
-      <div className="min-w-0">
-        <p className="wx-num truncate font-medium text-foreground">{p.path}</p>
-        <p className="truncate text-xs text-muted-foreground">{p.title}</p>
-      </div>
-    ),
-  },
-  {
-    key: "type",
-    header: "Type",
-    text: (p) => p.type,
-    sortValue: (p) => p.type,
-    render: (p) => <span className="rounded-md bg-muted px-1.5 py-0.5 text-[11px] font-medium capitalize text-muted-foreground">{p.type}</span>,
-  },
-  { key: "status", header: "Status", text: (p) => p.status, sortValue: (p) => p.status, render: (p) => <PageBadge status={p.status} /> },
-  {
-    key: "seo",
-    header: "SEO",
-    align: "center",
-    text: (p) => String(p.seo_score),
-    sortValue: (p) => p.seo_score,
-    render: (p) => <ScoreBadge score={p.seo_score} />,
-  },
-  {
-    key: "issues",
-    header: "Issues",
-    text: (p) => p.seo_issues.join(" "),
-    render: (p) =>
-      p.seo_issues.length ? (
-        <span className="text-xs text-destructive">{p.seo_issues[0]}</span>
-      ) : (
-        <span className="text-xs text-muted-foreground/60">Clean</span>
-      ),
-  },
-  {
-    key: "views",
-    header: "Views 30d",
-    align: "right",
-    text: (p) => String(p.views_30d),
-    sortValue: (p) => p.views_30d,
-    render: (p) => <span className="wx-num text-muted-foreground">{formatNumber(p.views_30d)}</span>,
-  },
-  {
-    key: "updated",
-    header: "Last edited",
-    align: "right",
-    text: (p) => `${p.updated_at} ${p.updated_by}`,
-    sortValue: (p) => p.updated_at,
-    render: (p) => (
-      <div className="text-right">
-        <p className="text-xs text-muted-foreground">{relativeDay(p.updated_at)}</p>
-        <p className="text-[10px] text-muted-foreground/70">{p.updated_by}</p>
-      </div>
-    ),
-  },
+const KPIS = [
+  { label: "Live pages", value: "34", note: "8 city + 6 blog + core" },
+  { label: "In review", value: "2", note: "editor sign-off" },
+  { label: "Drafts", value: "4", note: "incl. AI first-passes" },
+  { label: "Avg. page speed", value: "87", note: "see /speed" },
 ];
 
-export default function PagesPage() {
-  const count = (test: (p: SitePage) => boolean) => PAGES.filter(test).length;
-  const avg = Math.round(PAGES.reduce((s, p) => s + p.seo_score, 0) / PAGES.length);
+const PAGES = [
+  { page: "Home", path: "/", tpl: "Landing v3", status: "Published", owner: "Editor", updated: "2026-10-04" },
+  { page: "Kitchens Lahore", path: "/kitchens-lahore", tpl: "City landing v3", status: "Review", owner: "Editor", updated: "2026-10-12" },
+  { page: "Gallery", path: "/gallery", tpl: "Masonry v2", status: "Published", owner: "Editor", updated: "2026-09-30" },
+  { page: "Book a site visit", path: "/bookings", tpl: "Form v4", status: "Published", owner: "Sales", updated: "2026-09-18" },
+  { page: "About & karigars", path: "/about", tpl: "Story v1", status: "Published", owner: "Owner", updated: "2026-08-11" },
+  { page: "Care guides", path: "/care", tpl: "Article v2", status: "Published", owner: "Editor", updated: "2026-08-22" },
+  { page: "Contact", path: "/contact", tpl: "Form v4", status: "Published", owner: "Editor", updated: "2026-07-19" },
+  { page: "Franchise", path: "/franchise", tpl: "Landing v3", status: "Draft", owner: "Owner", updated: "2026-10-10" },
+];
 
+const PILL: Record<string, string> = {
+  Published: "bg-teal-500/10 text-teal-500 ring-teal-500/25",
+  Review: "bg-amber-500/10 text-amber-500 ring-amber-500/25",
+  Draft: "bg-muted text-muted-foreground ring-border",
+};
+
+export default function PagesPage() {
   return (
     <>
       <PageHeader
         title="Pages"
-        description={`${PAGES.length} pages across services, cities, projects and the blog. Status changes write to the managed .htaccess block and rebuild sitemap.xml.`}
+        description="The full woodex.pk inventory — core, city and article pages with template, owner and status."
         actions={
-          <>
-            <button type="button" className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background-1 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted">
-              <Upload className="size-4" />
-              Bulk SEO audit
-            </button>
-            <button type="button" className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover">
-              <Plus className="size-4" />
-              New page
-            </button>
-          </>
+          <a href="/builder" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+            Open builder
+          </a>
         }
       />
-      <PageBody className="space-y-5">
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {[
-            { label: "Total pages", value: PAGES.length },
-            { label: "Published", value: count((p) => p.status === "published") },
-            { label: "Drafts", value: count((p) => p.status === "draft") },
-            { label: "Average SEO", value: avg },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl border border-card-line bg-card px-4 py-3">
-              <p className="text-[13px] text-muted-foreground">{s.label}</p>
-              <p className="wx-num mt-1 text-2xl font-bold text-foreground">{s.value}</p>
+      <PageBody>
+        <div className="grid grid-cols-2 gap-5 xl:grid-cols-4">
+          {KPIS.map((k) => (
+            <div key={k.label} className="bg-card border border-card-line shadow-2xs rounded-xl p-4">
+              <p className="text-xs text-muted-foreground-1">{k.label}</p>
+              <p className="mt-1 text-2xl font-bold text-foreground wx-num">{k.value}</p>
+              <p className="mt-0.5 text-[11px] text-muted-foreground-1">{k.note}</p>
             </div>
           ))}
         </div>
 
-        <DataTable
-          rows={PAGES}
-          columns={columns}
-          rowKey={(p) => p.id}
-          searchPlaceholder="Search path or title…"
-          emptyTitle="No pages match"
-          toolbar={
-            <span className="hidden items-center gap-1.5 text-xs text-muted-foreground sm:flex">
-              <Globe className="size-3.5" />
-              {count((p) => p.seo_issues.length > 0)} with SEO issues
-            </span>
-          }
-          filters={[
-            { id: "published", label: "Published", count: count((p) => p.status === "published"), test: (p) => p.status === "published" },
-            { id: "hidden", label: "Hidden", count: count((p) => p.status === "hidden"), test: (p) => p.status === "hidden" },
-            { id: "draft", label: "Draft", count: count((p) => p.status === "draft"), test: (p) => p.status === "draft" },
-            { id: "issues", label: "Has issues", count: count((p) => p.seo_issues.length > 0), test: (p) => p.seo_issues.length > 0 },
-          ]}
-        />
+        <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-card-line">
+            <h2 className="text-sm font-semibold text-foreground">Inventory</h2>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-card-divider">
+              <thead className="bg-surface">
+                <tr>
+                  {["Page", "Path", "Template", "Status", "Owner", "Updated"].map((h) => (
+                    <th key={h} scope="col" className="px-4 py-2.5 text-start text-xs font-medium uppercase tracking-wide text-muted-foreground-1">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-card-divider">
+                {PAGES.map((p) => (
+                  <tr key={p.path} className="transition-colors hover:bg-muted/40">
+                    <td className="px-4 py-2.5 font-medium text-foreground whitespace-nowrap">{p.page}</td>
+                    <td className="px-4 py-2.5"><code className="text-xs text-primary">{p.path}</code></td>
+                    <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">{p.tpl}</td>
+                    <td className="px-4 py-2.5">
+                      <span className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold ring-1 ring-inset ${PILL[p.status]}`}>{p.status}</span>
+                    </td>
+                    <td className="px-4 py-2.5 text-muted-foreground whitespace-nowrap">{p.owner}</td>
+                    <td className="wx-num px-4 py-2.5 text-right text-muted-foreground whitespace-nowrap">{p.updated}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </PageBody>
     </>
   );
