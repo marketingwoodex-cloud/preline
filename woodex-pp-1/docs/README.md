@@ -4,7 +4,9 @@ Read in this order:
 
 | Doc | What it answers |
 | --- | --- |
-| `DEVELOPER-MASTER-DOCUMENT.md` | **Start here.** Every module, all 57 routes, all 124 API actions, conventions, and what is pending. |
+| `MASTER-PENDING-TASKS.md` | **Start here.** Gated sequence: verify → remove old servers → run updated → clean → organize → approve → Hostinger. |
+| `MISSING-REPORT-P29-PRO.md` | Gap report vs the four v2.1-pro docs (366 actions/35 files, 59 routes, 25 tables/49 stores). |
+| `DEVELOPER-MASTER-DOCUMENT.md` | Every module, all 57 routes, API actions, conventions, pending. |
 | `QA-MASTER-AUDIT.md` | Full system audit 2026-10-12: routes, speed, features, code quality, bugs found/fixed, risk register. |
 | `MASTER-TASK-PLAN.md` | Every pending task across deploy/API/security/Batch-3/tooling. |
 | `HOSTINGER-DEPLOY-PLAN.md` | Folder organization + pipeline for Hostinger shared hosting (static export + PHP API). |

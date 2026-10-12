@@ -70,18 +70,18 @@ export const NAV: NavGroup[] = [
   {
     label: "Conversations",
     items: [
-      { label: "Live chat", href: "/chat", icon: MessageSquare, planned: true },
-      { label: "Train AI", href: "/ai", icon: Sparkles, planned: true },
+      { label: "Live chat", href: "/chat", icon: MessageSquare },
+      { label: "Train AI", href: "/ai", icon: Sparkles },
     ],
   },
   {
     label: "Website",
     items: [
       { label: "Pages", href: "/pages", icon: PanelsTopLeft },
-      { label: "Page builder", href: "/builder", icon: Layers, planned: true },
+      { label: "Page builder", href: "/builder", icon: Layers },
       { label: "Section library", href: "/library", icon: Library },
       { label: "Header & footer", href: "/chrome", icon: PanelsTopLeft, planned: true },
-      { label: "Media", href: "/media", icon: ImageIcon, planned: true },
+      { label: "Media", href: "/media", icon: ImageIcon },
     ],
   },
   {
@@ -97,14 +97,15 @@ export const NAV: NavGroup[] = [
     label: "Marketing & SEO",
     items: [
       { label: "SEO", href: "/seo", icon: Search },
-      { label: "Redirects", href: "/redirects", icon: ArrowLeftRight, planned: true },
+      { label: "Redirects", href: "/redirects", icon: ArrowLeftRight },
     ],
   },
   {
     label: "Settings",
     items: [
       { label: "Settings", href: "/settings", icon: Settings },
-      { label: "Activity log", href: "/activity", icon: TrendingUp, planned: true },
+      { label: "Activity log", href: "/activity", icon: TrendingUp },
+      { label: "Logs", href: "/logs", icon: TrendingUp, planned: true },
       { label: "Backups", href: "/backups", icon: Archive, planned: true },
     ],
   },

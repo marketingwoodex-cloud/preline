@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft, Hammer } from "lucide-react";
 import { NAV_FLAT } from "@/lib/nav";
 
@@ -7,12 +8,22 @@ import { NAV_FLAT } from "@/lib/nav";
  *
  * Without this, the "Soon" links in the sidebar 404 — which is worse than an
  * honest placeholder, because it hides the fact that the screen is planned
- * rather than missing.
+ * rather than missing. Paths that are NOT in the IA get a real 404.
+ *
+ * In export mode every planned route must be enumerable, hence
+ * generateStaticParams below.
  */
+export function generateStaticParams() {
+  return NAV_FLAT.filter((i) => i.planned).map((i) => ({
+    rest: i.href.split("/").filter(Boolean),
+  }));
+}
+
 export default async function PlannedPage({ params }: { params: Promise<{ rest: string[] }> }) {
   const { rest } = await params;
   const href = `/${rest.join("/")}`;
   const item = NAV_FLAT.find((i) => i.href === href);
+  if (!item) notFound();
 
   return (
     <div className="flex min-h-full items-center justify-center px-4 py-16">

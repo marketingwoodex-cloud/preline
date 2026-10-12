@@ -3,24 +3,36 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
+// Dual-mode build:
+//   default        → "standalone" (fast local preview via server.js)
+//   WX_EXPORT=1    → "export"     (static site for Hostinger shared hosting;
+//                                   pair with WX_BASE_PATH, e.g. /admin)
+const EXPORT = !!process.env.WX_EXPORT;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: "standalone",
-  // Block partials and the Preline runtime must NEVER be served stale: the
-  // preview proxy/browser previously cached them and kept resurrecting old
-  // shells (including an invisible click-swallowing overlay).
-  async headers() {
-    const noStore = [
-      { key: "Cache-Control", value: "no-store, no-cache, must-revalidate, proxy-revalidate" },
-      { key: "Pragma", value: "no-cache" },
-      { key: "Expires", value: "0" },
-    ];
-    return [
-      { source: "/blocks/:path*", headers: noStore },
-      { source: "/preline.js", headers: noStore },
-    ];
-  },
+  output: EXPORT ? "export" : "standalone",
+  // Folder-per-route (quotations/index.html) so Apache deep links resolve
+  // with zero rewrite rules on shared hosting.
+  trailingSlash: EXPORT,
+  basePath: EXPORT ? process.env.WX_BASE_PATH || "" : "",
+  // Block partials and the Preline runtime must NEVER be served stale on the
+  // standalone server. In export mode `headers()` is unsupported — the same
+  // cache rules ship as .htaccess instead (deploy/hostinger/htaccess/).
+  headers: EXPORT
+    ? undefined
+    : async () => {
+        const noStore = [
+          { key: "Cache-Control", value: "no-store, no-cache, must-revalidate, proxy-revalidate" },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+        ];
+        return [
+          { source: "/blocks/:path*", headers: noStore },
+          { source: "/preline.js", headers: noStore },
+        ];
+      },
   // This app lives in a subfolder of the preline repo, which has its own
   // package-lock.json. Pin the tracing root so Next doesn't infer the repo
   // root and trace the whole library into the standalone output.

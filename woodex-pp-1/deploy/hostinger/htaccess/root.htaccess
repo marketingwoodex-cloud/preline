@@ -1,0 +1,30 @@
+# Woodex PP-1 — public_html/.htaccess (root)
+# HTTPS force + cache policy for the static admin export.
+
+# 1) Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# 2) Landing → admin (remove once a real marketing site exists)
+DirectoryIndex index.html
+# RewriteRule ^$ /admin/ [R=302,L]
+
+# 3) Hashed build assets — cache forever
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:js|css|woff2?|png|jpe?g|svg|webp|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# 4) HTML + block partials — always revalidate (shell must never go stale)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_headers.c>
+  <LocationMatch "^/admin/blocks/">
+    Header set Cache-Control "no-store, no-cache, must-revalidate"
+  </LocationMatch>
+</IfModule>

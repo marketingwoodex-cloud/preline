@@ -1,0 +1,17 @@
+# Woodex PP-1 — public_html/api/.htaccess
+# Protect the server-only config and scope CORS to the admin origin.
+
+# Never serve credentials/config over HTTP
+<FilesMatch "^(config|.*\.json)$">
+  Require all denied
+</FilesMatch>
+
+# Deny directory listing
+Options -Indexes
+
+# CORS for the admin front-end (adjust domain)
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "https://YOUR-DOMAIN.example"
+  Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+  Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
