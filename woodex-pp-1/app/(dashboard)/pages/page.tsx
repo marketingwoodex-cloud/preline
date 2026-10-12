@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Pages" };
@@ -33,9 +34,9 @@ export default function PagesPage() {
         title="Pages"
         description="The full woodex.pk inventory — core, city and article pages with template, owner and status."
         actions={
-          <a href="/builder" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+          <Link href="/builder" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
             Open builder
-          </a>
+          </Link>
         }
       />
       <PageBody>

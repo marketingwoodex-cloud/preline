@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Inbox" };
@@ -36,9 +37,9 @@ export default function ChatPage() {
         title="Inbox"
         description="Every channel in one queue. The AI agent answers what it can, hands over what it must — and shows its status right here."
         actions={
-          <a href="/threads" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+          <Link href="/threads" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
             Open active thread
-          </a>
+          </Link>
         }
       />
       <PageBody>
@@ -66,7 +67,7 @@ export default function ChatPage() {
             <ul className="divide-y divide-card-divider">
               {QUEUE.map((q) => (
                 <li key={q.who}>
-                  <a href="/threads" className="flex items-center gap-x-3 px-5 py-3.5 hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus">
+                  <Link href="/threads" className="flex items-center gap-x-3 px-5 py-3.5 hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus">
                     <span className={`grid size-9 shrink-0 place-items-center rounded-lg ${CH_ICON[q.channel].cls}`}>
                       <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={CH_ICON[q.channel].d} /></svg>
                     </span>
@@ -81,7 +82,7 @@ export default function ChatPage() {
                     <span className={`shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold ring-1 ring-inset ${q.sla === "late" ? "bg-amber-500/10 text-amber-500 ring-amber-500/25" : "bg-teal-500/10 text-teal-500 ring-teal-500/25"}`}>
                       {q.wait}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

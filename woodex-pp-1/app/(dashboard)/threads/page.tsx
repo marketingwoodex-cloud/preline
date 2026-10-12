@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Threads" };
@@ -47,7 +48,7 @@ export default function ThreadsPage() {
             <ul className="divide-y divide-card-divider">
               {THREADS.map((t) => (
                 <li key={t.who}>
-                  <a
+                  <Link
                     href="/threads"
                     className={`flex items-center gap-x-3 px-5 py-3 hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus ${t.active ? "bg-muted" : ""}`}
                     aria-current={t.active ? "true" : undefined}
@@ -67,7 +68,7 @@ export default function ThreadsPage() {
                         {t.unread}
                       </span>
                     )}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

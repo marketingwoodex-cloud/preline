@@ -5,6 +5,7 @@ Read in this order:
 | Doc | What it answers |
 | --- | --- |
 | `DEVELOPER-MASTER-DOCUMENT.md` | **Start here.** Every module, all 57 routes, all 124 API actions, conventions, and what is pending. |
+| `QA-MASTER-AUDIT.md` | Full system audit 2026-10-12: routes, speed, features, code quality, bugs found/fixed, risk register. |
 | `MASTER-TASK-PLAN.md` | Every pending task across deploy/API/security/Batch-3/tooling. |
 | `HOSTINGER-DEPLOY-PLAN.md` | Folder organization + pipeline for Hostinger shared hosting (static export + PHP API). |
 | `PROJECT-STATUS-REPORT.md` | What is shipped now, what is missing, what is pending. |

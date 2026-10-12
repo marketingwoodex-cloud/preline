@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Sales & Tracking" };
@@ -94,7 +95,7 @@ export default function SalesTrackingPage() {
                 <h2 className="text-sm font-semibold text-foreground">Leads &amp; Pipeline</h2>
                 <p className="text-sm text-muted-foreground-2">Live stage distribution — full board on Pipeline</p>
               </div>
-              <a href="/pipeline" className="text-xs font-semibold text-primary hover:underline">Open pipeline</a>
+              <Link href="/pipeline" className="text-xs font-semibold text-primary hover:underline">Open pipeline</Link>
             </div>
             <div className="mt-4 space-y-3">
               {STAGES.map((s) => (
@@ -147,7 +148,7 @@ export default function SalesTrackingPage() {
                 <h2 className="text-sm font-semibold text-foreground">Bookings &amp; Calendar</h2>
                 <p className="text-sm text-muted-foreground-2">Appointments and statuses</p>
               </div>
-              <a href="/bookings" className="text-xs font-semibold text-primary hover:underline">Calendar</a>
+              <Link href="/bookings" className="text-xs font-semibold text-primary hover:underline">Calendar</Link>
             </div>
             <ul className="divide-y divide-card-divider">
               {BOOKINGS.map((b, i) => (
@@ -170,7 +171,7 @@ export default function SalesTrackingPage() {
                 <h2 className="text-sm font-semibold text-foreground">Activity &amp; Follow-ups</h2>
                 <p className="text-sm text-muted-foreground-2">Interaction history with leads</p>
               </div>
-              <a href="/activity" className="text-xs font-semibold text-primary hover:underline">Full log</a>
+              <Link href="/activity" className="text-xs font-semibold text-primary hover:underline">Full log</Link>
             </div>
             <ul className="divide-y divide-card-divider">
               {FOLLOWUPS.map((f, i) => (
@@ -195,10 +196,10 @@ export default function SalesTrackingPage() {
             <h2 className="text-sm font-semibold text-foreground">Clients &amp; Accounts</h2>
             <p className="text-sm text-muted-foreground-2">128 client records · enquiries, chats, quotes, invoices and payments matched on phone + email</p>
           </div>
-          <a href="/clients" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+          <Link href="/clients" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
             Open Clients
             <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          </a>
+          </Link>
         </div>
       </PageBody>
     </>

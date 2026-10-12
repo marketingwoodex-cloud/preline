@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageBody, PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata = { title: "Blog" };
@@ -24,9 +25,9 @@ export default function BlogPage() {
         title="Blog"
         description="Stories that sell: real projects, real prices, real care. Every post links to a booking CTA."
         actions={
-          <a href="/blog/editor" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
+          <Link href="/blog/editor" className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-primary border border-primary-line text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:bg-primary-focus">
             New post
-          </a>
+          </Link>
         }
       />
       <PageBody>
@@ -39,7 +40,7 @@ export default function BlogPage() {
             <ul className="divide-y divide-card-divider">
               {POSTS.map((p) => (
                 <li key={p.title}>
-                  <a href="/blog/editor" className="px-5 py-4 flex items-center gap-x-4 hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus">
+                  <Link href="/blog/editor" className="px-5 py-4 flex items-center gap-x-4 hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus">
                     <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
                       <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
                     </span>
@@ -48,7 +49,7 @@ export default function BlogPage() {
                       <p className="mt-0.5 text-[11px] text-muted-foreground-1 wx-num">{p.views.toLocaleString()} views · {p.leads} leads · upd {p.updated}</p>
                     </div>
                     <span className={`shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold ring-1 ring-inset ${PILL[p.status]}`}>{p.status}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
