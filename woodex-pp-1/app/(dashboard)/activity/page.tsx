@@ -90,6 +90,48 @@ export default function ActivityPage() {
             </section>
           ))}
         </div>
+
+        {/* Live collaboration — WebSocket (Batch 3 · fixture — wiring pending) */}
+        <div className="mt-5 bg-card border border-card-line shadow-2xs rounded-xl overflow-hidden">
+          <div className="px-5 py-3 border-b border-card-line flex flex-wrap items-center gap-x-3 gap-y-1">
+            <h2 className="text-sm font-semibold text-foreground">Live collaboration</h2>
+            <span className="inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-[11px] font-semibold bg-teal-500/10 text-teal-500 ring-1 ring-inset ring-teal-500/25">
+              <span className="size-1.5 rounded-full bg-teal-500 animate-pulse" /> Connected
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">Beta</span>
+            <span className="ms-auto text-[11px] text-muted-foreground-1">2 teammates online</span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-card-divider">
+            <div className="p-5">
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground-1">Presence</h3>
+              <ul className="mt-3 space-y-2">
+                {[
+                  ["HM", "Hassan Mehmood", "viewing /pipeline", true],
+                  ["AK", "Ayesha Khan", "editing Q-2611 on /quotations", true],
+                  ["You", "You", "here — /activity", false],
+                ].map(([ini, who, what, other]) => (
+                  <li key={String(who)} className="flex items-center gap-x-3">
+                    <span className="grid size-7 shrink-0 place-items-center rounded-full bg-surface-5 border border-line-3 text-[10px] font-semibold text-foreground">{ini}</span>
+                    <p className="min-w-0 grow text-xs text-foreground"><span className="font-medium">{who}</span> <span className="text-muted-foreground-1">· {what}</span></p>
+                    {other && <span className="shrink-0 size-1.5 rounded-full bg-teal-500" />}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-5">
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground-1">Live events</h3>
+              <ul className="mt-3 space-y-1.5 text-xs">
+                {[["11:42", "Ayesha moved “Gulberg Villa” to Negotiation"], ["11:40", "Hassan joined the pipeline board"], ["11:36", "Comment added on Q-2611: “advance 50%”"]].map(([t, e]) => (
+                  <li key={t} className="flex items-start gap-x-2.5">
+                    <span className="wx-num shrink-0 text-muted-foreground-1">{t}</span>
+                    <span className="min-w-0 grow text-foreground">{e}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-[11px] text-muted-foreground-1">Socket transport activates with API wiring; presence + events run on fixtures.</p>
+            </div>
+          </div>
+        </div>
       </PageBody>
     </>
   );

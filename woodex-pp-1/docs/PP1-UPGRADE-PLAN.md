@@ -26,9 +26,17 @@ follow-up, WA/Call/Quote quick actions) · U10 CSV/XLSX export actions on /repor
 | U9 | CRM | pipeline card v2 (days-in-stage, next follow-up, owner avatar, stage totals) |
 | U10 | Ops | CSV/XLSX export buttons wired to fixtures on tables (reports, contacts, leads) |
 
-## Batch 3 — later (needs real API; out of current scope)
-- Google Sheets sync, payment gateway adapters, client self-service portal,
-  WebSocket collaboration, AI BOQ estimator (v2.5-Pro roadmap items).
+## Batch 3 — UI shipped on fixtures 2026-10-12 ✅ (wiring still pending real API)
+| # | Area | Upgrade | Screen |
+|---|------|---------|--------|
+| U11 | Ops | Google Sheets sync — connection status, field mapping, sync log, Sync now | /reports |
+| U12 | Payments | Gateway adapters — JazzCash (Live) / Easypaisa (Sandbox) / Raast (Active), creds checklists, webhook log + invoice reconciliation | /payments |
+| U13 | CRM | Client self-service portal — preview, capability list, magic-link invite | /clients |
+| U14 | Ops | Live collaboration (WebSocket, beta) — presence, live events | /activity |
+| U15 | Projects | AI BOQ estimator — item table, total, confidence, Send to quote | /projects |
+
+Each panel states its fixture status in-copy; transport/keys/wiring land with the
+real API (see MASTER-TASK-PLAN.md phases A/B3).
 
 ## Guardrails (unchanged)
 - Original v2.1 API/DB untouched; fixtures until wiring.

@@ -40,13 +40,16 @@ shipped and verified (57 routes × 200). Details per phase live in the linked do
 
 ## Phase B3 — Batch 3 features  → `PP1-UPGRADE-PLAN.md`
 
+UI shipped on fixtures 2026-10-12 (U11–U15 in `PP1-UPGRADE-PLAN.md`); the 🔒 marks
+what remains — the wiring/keys, not the screens.
+
 | # | Task | Status |
 | --- | --- | --- |
-| B1 | Google Sheets sync (leads/reports) | 🔒 (Sheets API keys) |
-| B2 | Payment gateways: JazzCash / Easypaisa / Raast | 🔒 (merchant accounts) |
-| B3 | Client self-service portal (quotes, milestones, review link) | 🔒 (needs auth S1 + API A2) |
-| B4 | WebSockets real-time collaboration | 🔒 (needs VPS — Track B) |
-| B5 | AI BOQ estimator | 🔒 (engine keys + real pricing data) |
+| B1 | Google Sheets sync — wire to Sheets API (UI on /reports) | 🔒 (Sheets API keys) |
+| B2 | Payment gateways — merchant onboarding + adapters (UI on /payments) | 🔒 (merchant accounts) |
+| B3 | Client portal — magic-link auth + data (UI on /clients) | 🔒 (needs auth S1 + API A2) |
+| B4 | WebSockets — socket server + client transport (UI on /activity) | 🔒 (needs VPS — Track B) |
+| B5 | AI BOQ — engine + rate library (UI on /projects) | 🔒 (engine keys + real pricing data) |
 | B6 | SEO agent scan cron / TG webhook on PHP | 🔒 (live server cron, D-phase infra) |
 
 ## Phase T — Tooling & quality
