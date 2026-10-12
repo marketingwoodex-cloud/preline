@@ -4,7 +4,9 @@ Read in this order:
 
 | Doc | What it answers |
 | --- | --- |
-| `PROJECT-STATUS-REPORT.md` | **Start here.** What is shipped now, what is missing, what is pending. |
+| `MASTER-TASK-PLAN.md` | **Start here.** Every pending task across deploy/API/security/Batch-3/tooling. |
+| `HOSTINGER-DEPLOY-PLAN.md` | Folder organization + pipeline for Hostinger shared hosting (static export + PHP API). |
+| `PROJECT-STATUS-REPORT.md` | What is shipped now, what is missing, what is pending. |
 | `PHASE-PLAN.md` | Original phase plan for PP-1 (phases 1–3). |
 | `NEXT-MASTER-PLAN.md` | Master build plan for the 57-screen frontend v1. |
 | `MASTER-PLAN.md` | Earlier planning artifact (superseded by NEXT-MASTER-PLAN). |
